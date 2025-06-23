@@ -28,7 +28,7 @@ const Marquee: React.FC = () => {
           backgroundClip: 'text',
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent'
-        }}
+        }} 
       >
         Every Challenge
       </span>
