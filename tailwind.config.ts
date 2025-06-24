@@ -9,9 +9,14 @@ const config: Config = {
   theme: {
     extend: {
         colors: {
-            background: 'var(--background)',
-            foreground: 'var(--foreground)',
-            textColor: 'var(--text-color)',
+            light: '#FFFFFF',
+            dark: '#0B0A09',
+            primary: '#DA46F8',
+            secondary: '#7B51F8',
+            tertiary: '#6940E4',
+            quaternary: '#242424',
+            quinary: '#1A1A1A',
+            senary: '#2F2F2F',
         },
         
         fontFamily: {
@@ -27,6 +32,7 @@ const config: Config = {
           'custom': '0px 2.172px 5.429px 0px rgba(0, 0, 0, 0.10)',
           'custom-2': '0px 2.152px 3.767px 0px rgba(30, 12, 84, 0.38) inset, -2.152px 2.152px 11.3px 0px rgba(105, 64, 228, 0.35);',
           'custom-3': '0px 2px 3.5px 0px rgba(30, 12, 84, 0.38) inset, -2px 2px 10.5px 0px rgba(105, 64, 228, 0.35)',
+          'custom-4': 'linear-gradient(90deg, #6940E4 -8.03%, #DA46F8 105.34%);',
         },
         animation: {
           'marquee': 'marquee 20s linear infinite',

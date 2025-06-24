@@ -30,6 +30,9 @@ const roboto = Roboto({
 export const metadata: Metadata = {
   title: 'Poligono',
   description: 'Next.js application built with App Router',
+  icons: {
+    icon: '/images/logo/favicon.svg',
+  },
 }
 
 export default function RootLayout({
@@ -43,6 +46,6 @@ export default function RootLayout({
         <Header />
         {children}
       </body>
-    </html>
+    </html> 
   )
 } 
