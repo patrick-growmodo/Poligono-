@@ -8,9 +8,9 @@ const ChannelPricingSection: React.FC = () => {
   const [selectedCountry, setSelectedCountry] = useState('United States');
 
   const countries: Country[] = [
-    { name: 'United States', flag: '🇺🇸' , flag_image: '/images/icons/us-flag.svg', currency_symbol: '$' },
-    { name: 'United Kingdom', flag: '🇬🇧' , flag_image: '/images/icons/uk.svg', currency_symbol: '£' },
-    { name: 'Canada', flag: '🇨🇦' , flag_image: '/images/icons/ca.svg', currency_symbol: 'C$' }
+    { name: 'United States', flag: '🇺🇸' , flag_image: '/images/icons/us-flag.svg', currency_symbol: '$' }
+    // { name: 'United Kingdom', flag: '🇬🇧' , flag_image: '/images/icons/uk.svg', currency_symbol: '£' },
+    // { name: 'Canada', flag: '🇨🇦' , flag_image: '/images/icons/ca.svg', currency_symbol: 'C$' }
   ];
   
 

@@ -5,8 +5,8 @@ import Image from 'next/image';
 
 const IntegrationsSection: React.FC = () => {
   return (
-    <section className="bg-dark px-4 sm:px-6 lg:px-8">
-      <div className="max-w-[1312px] mx-auto border-t-[1px] py-[64px] px-[32px] border-[#484848]">
+    <section className="bg-dark px-4 sm:px-6 lg:px-8  sm:py-[0px]  sm:px-[0px] ">
+      <div className="max-w-[1312px] mx-auto border-t-[1px] py-[64px] px-[32px] lg:py-[64px] lg:px-[64px] border-[#484848] sm:py-[40px] sm:px-[0px]">
         {/* Title and Description */}
         <div className="text-center mb-[61px]">
             <h2 

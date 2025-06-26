@@ -169,9 +169,8 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, className = '' }) =
           <Button
             variant="secondary"
             size="lg"
-            style={{width: 'fit-content'}}
             type="submit"
-            className="w-full bg-white text-[#222B45] text-[16px] hover:bg-gray-100"
+            className="w-full bg-white text-[#222B45] text-[16px] hover:bg-gray-100 lg:w-fit lg:w-fit"
           >
             Get Started
           </Button>

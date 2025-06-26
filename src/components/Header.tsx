@@ -17,7 +17,7 @@ const Header: React.FC = () => {
   };
   return (
     <header className="bg-white border-b border-gray-200 h-[76px] pt-[14px] pb-[14px] flex items-center w-full">
-      <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 ">
+      <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 max-w-[1260px]">
         <div className="flex items-center justify-between w-full">
           {/* Logo Section */}
           <div className="flex items-center space-x-3 ">
@@ -28,33 +28,33 @@ const Header: React.FC = () => {
           <div className="hidden lg:flex items-center space-x-8">
             {/* Navigation Menu */}
             <nav className="flex items-center space-x-6">
-              <Link 
+              {/* <Link 
                 href="/about" 
                 className="text-black hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors"
               >
                 About
-              </Link>
+              </Link> */}
               <Link 
-                href="/services" 
-                className="text-black hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors"
+                href="#services-section" 
+                className="text-black hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors hover:text-[#DA46F8]"
               >
                 Services
               </Link>
               <Link 
-                href="/features" 
-                className="text-black hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors"
+                href="#features-section" 
+                className="text-black hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors hover:text-[#DA46F8]"
               >
                 Features
               </Link>
               <Link 
-                href="/pricing" 
-                className="text-black hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors"
+                href="#pricing-section" 
+                className="text-black hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors hover:text-[#DA46F8]"
               >
                 Pricing
               </Link>
               <Link 
-                href="/contact" 
-                className="text-black hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors"
+                href="#contact-section" 
+                className="text-black hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors hover:text-[#DA46F8]"
               >
                 Contact
               </Link>
@@ -108,10 +108,10 @@ const Header: React.FC = () => {
         )}
         
         {/* Drawer */}
-        <div className={`fixed inset-y-0 right-0 max-w-md w-full bg-white shadow-xl z-50 lg:hidden transform transition-transform duration-300 ease-in-out ${
+        <div className={`fixed inset-y-0 right-0 max-w-md w-full bg-white shadow-xl z-50 lg:hidden transform transition-transform duration-300 ease-in-out sm:w-[320px] ${
           isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}>
-            <div className="flex flex-col h-full">
+            <div className="flex flex-col h-full"> 
               {/* Header */}
               <div className="flex items-center justify-between px-4 pt-[18px] pb-[18px] border-b border-gray-200">
                 {/* <Image src="/images/logo/logo.svg" alt="Poligono" width={154} height={33.437} /> */}
@@ -139,35 +139,35 @@ const Header: React.FC = () => {
               {/* Navigation */}
               <nav className="px-4 py-6 space-y-4">
                 <Link 
-                  href="/about" 
+                  href="#services-section" 
                   onClick={closeMobileMenu}
                   className="block text-black hover:text-gray-900 px-3 py-2 text-base font-medium transition-colors border-b border-gray-100 pb-4"
                 >
                   About
                 </Link>
                 <Link 
-                  href="/services" 
+                  href="#features-section" 
                   onClick={closeMobileMenu}
                   className="block text-black hover:text-gray-900 px-3 py-2 text-base font-medium transition-colors border-b border-gray-100 pb-4"
                 >
                   Services
                 </Link>
                 <Link 
-                  href="/features" 
+                  href="#pricing-section" 
                   onClick={closeMobileMenu}
                   className="block text-black hover:text-gray-900 px-3 py-2 text-base font-medium transition-colors border-b border-gray-100 pb-4"
                 >
                   Features
                 </Link>
                 <Link 
-                  href="/pricing" 
+                  href="#contact-section" 
                   onClick={closeMobileMenu}
                   className="block text-black hover:text-gray-900 px-3 py-2 text-base font-medium transition-colors border-b border-gray-100 pb-4"
                 >
                   Pricing
                 </Link>
                 <Link 
-                  href="/contact" 
+                  href="#contact-section" 
                   onClick={closeMobileMenu}
                   className="block text-black hover:text-gray-900 px-3 py-2 text-base font-medium transition-colors border-b border-gray-100 pb-4"
                 >

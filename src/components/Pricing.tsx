@@ -8,7 +8,7 @@ import PricingSection from './PricingSection';
 
 const PricingContent: React.FC = () => {
     return (
-        <section className='bg-white pt-[100px] pb-[48px]'>
+        <section id='pricing-section' className='bg-white pt-[100px] pb-[48px]'>
             <PricingSection/>
             <ScaleDiscountSection/>
         </section>

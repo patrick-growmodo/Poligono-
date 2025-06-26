@@ -7,7 +7,7 @@ const ImageContent: React.FC = () => {
       <div className="max-w-4xl mx-auto text-center">
         {/* Main Heading */}
         <h1 
-          className="text-black text-center font-medium mb-[32px] font-inter text-[56px] leading-[120%] tracking-[-0.56px]">
+          className="text-black text-center font-medium mb-[32px] font-inter text-[56px] leading-[120%] tracking-[-0.56px] sm:text-[50px]">
           AI Agents to{' '}
           <span className="text-[#DA46F8]">convert</span>, engage &<br />
           delight your customers
@@ -22,11 +22,11 @@ const ImageContent: React.FC = () => {
         </p>
 
         {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <Button variant="outline" size="md">
+        <div className="flex flex-col gap-4 justify-center items-center sm:flex-col lg:flex-row">
+          <Button variant="outline" size="md" className='w-full sm:w-[100%] lg:w-fit'>
             Talk to Sales
           </Button>
-          <Button variant="primary" size="md">
+          <Button variant="primary" size="md" className='w-full sm:w-[100%] lg:w-fit'>
             Request a Trial
           </Button>
         </div>

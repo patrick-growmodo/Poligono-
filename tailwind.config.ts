@@ -11,6 +11,7 @@ const config: Config = {
         colors: {
             light: '#FFFFFF',
             dark: '#0B0A09',
+            dark_2: '#11100D',
             primary: '#DA46F8',
             secondary: '#7B51F8',
             tertiary: '#6940E4',
@@ -39,6 +40,14 @@ const config: Config = {
           'fade-in': 'fade-in 0.3s ease-in-out',
           'fade-out': 'fade-out 0.15s ease-in-out',
         },
+        screens:{
+          'xs': '375px',
+          'sm': '425px', 
+          'md': '768px',
+          'lg': '1024px',
+          'xl': '1440px',
+        },
+
         keyframes: {
           marquee: {
             '0%': { transform: 'translateX(0%)' },

@@ -8,7 +8,9 @@
   --background-end-rgb: 255, 255, 255;
   --text-color: #6940E4;
 }
-
+html {
+  scroll-behavior: smooth;
+}
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -41,3 +43,8 @@ body {
     background-image: conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops));
   }
 } 
+@media (max-width: 1024px) {
+  .phone_image_mobile {
+    width: 100% !important;
+  }
+}

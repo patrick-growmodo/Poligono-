@@ -64,7 +64,7 @@ const featuresData2 = [
   }
 ];
   return (
-    <section className="bg-dark py-[100px]  px-4 sm:px-6 lg:px-8">
+    <section id='features-section' className="bg-dark py-[100px]  px-4 sm:px-6 lg:px-8">
       <ImageCardContent/>
       <FeatureGrid featuresData={featuresData} />
       <IntegrationsSection />

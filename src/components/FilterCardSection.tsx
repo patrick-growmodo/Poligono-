@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import Filter from './Filter';
+// import Filter from './Filter';
 import CardContent from './CardContent';
 
 const FilterCardSection: React.FC = () => {
@@ -17,15 +17,15 @@ const FilterCardSection: React.FC = () => {
         
         <div className="flex gap-[24px] flex-col md:flex-col lg:flex-row">
           {/* Filter Component - Left Side */}
-          <div className="w-full md:w-[100%] lg:w-[161px]">
+          {/* <div className="w-full md:w-[100%] lg:w-[161px]">
             <Filter 
               onFilterChange={handleFilterChange}
               activeFilter={activeFilter}
             />
-          </div>
+          </div> */}
           
-          {/* Card Content Component - Right Side */}
-          <div className="w-full md:w-[100%] lg:w-[1151px]">
+          {/* Card Content Component - Right Side lg:w-[1151px]*/}
+          <div className="w-full md:w-[100%] lg:w-[100%]">
             <CardContent activeFilter={activeFilter} />
           </div>
         </div>

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useId } from 'react';
 
 interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
   label?: string;
@@ -32,7 +32,8 @@ const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, CombinedProps>(
     id,
     ...props 
   }, ref) => {
-    const inputId = id || `input-${Math.random().toString(36).substr(2, 9)}`;
+    const generatedId = useId();
+    const inputId = id || generatedId;
     
     const getVariantClasses = () => {
       switch (variant) {
@@ -103,6 +104,7 @@ const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, CombinedProps>(
             ref={ref as React.Ref<HTMLTextAreaElement>}
             id={inputId}
             className={`${baseInputClasses}`}
+            suppressHydrationWarning
             {...(props as TextareaProps)}
           />
         ) : (
@@ -110,6 +112,7 @@ const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, CombinedProps>(
             ref={ref as React.Ref<HTMLInputElement>}
             id={inputId}
             className={baseInputClasses}
+            suppressHydrationWarning
             {...(props as InputProps)}
           />
         )}

@@ -10,12 +10,12 @@ const CustomerJourney: React.FC = () => {
     ]
 
   return (
-    <section className="bg-white pt-16 px-4 sm:px-6 lg:px-8">
+    <section id='services-section' className="bg-white pt-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-[1312px] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-end  ">
           {/* Left Content */}
           <div>
-            <h2 className="w-full text-[48px]  md:text-[48px] lg:text-[30px] font-medium text-black font-inter leading-[57.6px ]">
+            <h2 className="w-full text-[30px]  md:text-[48px] lg:text-[48px] font-medium text-black font-inter leading-[57.6px ]">
               {customerJourney[0].title}
             </h2>
           </div>

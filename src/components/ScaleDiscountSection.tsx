@@ -40,11 +40,11 @@ const ScaleDiscountSection: React.FC = () => {
           </div>
 
           {/* Right Side - Button */}
-          <div className="flex-shrink-0">
+          <div className="flex-shrink-0 sm:w-full md:w-full lg:w-fit ">
             <Button 
               variant="secondary"
               size="md"
-              className="bg-white text-black hover:bg-white px-[24px] py-[12px] text-[16px] font-medium rounded-[50px] transition-colors duration-300"
+              className="bg-white text-black hover:bg-white px-[24px] py-[12px] text-[16px] font-medium rounded-[50px] transition-colors duration-300 w-full md:w-full lg:w-fit"
             >
               Talk to Sales
             </Button>

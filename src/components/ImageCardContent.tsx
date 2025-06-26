@@ -28,7 +28,7 @@ const ImageCardContent: React.FC = () => {
     <div className="max-w-[1312px] mx-auto"> 
       {/* Main Title */}
       <div className="mb-[80px]">
-        <h2 className="text-[48px] font-normal text-white font-inter leading-[57.6px] max-w-[693px]">
+        <h2 className="text-[48px] font-normal text-white font-inter leading-[57.6px] max-w-[693px] sm:text-[50px]">
           Full Stack of AI Agent Superpowers in One Platform
         </h2>
       </div>
@@ -36,7 +36,7 @@ const ImageCardContent: React.FC = () => {
       {/* Two Column Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-[0px] border-t-[1px] border-[#484848]">
         {/* Left Column */}
-        <div className="space-y-[32px] p-[64px] border-b-[1px] pb-[0px] border-r-[1px] border-[#484848] md:border-r-[0px] border-b-[1px] lg:border-r-[1px] lg:border-b-[0px]">
+        <div className="flex flex-col justify-between space-y-[32px] md:p-[24px] md:pt-[40px] md:pb-[0px] p-[0px] pt-[32px] border-b-[1px] border-l-[0px] md:border-l-[0px] md:border-b-[1px]  border-[#484848] border-b-[1px] lg:border-r-[1px] lg:border-b-[0px]  lg:pb-[0px] lg:pt-[64px] lg:px-[64px]">
           <div className="max-w-[100%] lg:max-w-[450px]">
             <h3 className="text-[22px] font-normal text-white font-inter mb-[24px] leading-[30.8px]">
               On-Brand, Every Time
@@ -48,13 +48,13 @@ const ImageCardContent: React.FC = () => {
 
           {/* Phone Mockup */}
           <div className="relative">
-            <div className="relative w-[100%] mx-auto md:w-[100%] lg:w-[516px]">
+            <div className="relative w-[100%] md:w-[100%] mx-auto md:w-[100%] lg:w-[516px] phone_image_mobile">
               <Image
                 src="/images/gallery/phone.png"
                 alt="Phone mockup showing AI conversation"
                 width={516}
                 height={643.066}
-                className="object-contain"
+                className="object-contain w-[100%] md:w-[100%] lg:w-[100%] "
               />
               
             </div>
@@ -62,7 +62,7 @@ const ImageCardContent: React.FC = () => {
         </div>
 
         {/* Right Column */}
-        <div className="space-y-[32px] p-[64px] flex flex-col justify-between">
+        <div className="space-y-[32px] p-[64px] flex flex-col justify-between lg:p-[64px] lg:py-[64px] lg:py-[0px] sm:p-[24px] sm:py-[40px] sm:py-[0px] sm:px-[0px]">
           <div className="max-w-[100%] lg:max-w-[516px]">
             <h3 className="text-[22px] font-normal text-white font-inter mb-[24px] leading-[30.8px]">
               Knows Every Customer, Instantly

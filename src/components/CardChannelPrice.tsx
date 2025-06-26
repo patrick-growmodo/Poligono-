@@ -48,13 +48,13 @@ const CardChannelPrice: React.FC<CardChannelPriceProps> = ({ channel }) => (
       </div>
     </div>
     
-    <Button
+    {/* <Button
     variant="primary"
     size="lg"
     style={{width: 'fit-content'}}
     className="bg-black text-white rounded-[8px] py-[12px] px-[24px] text-[16px] font-medium font-inter hover:bg-gray-800 transition-colors">
       Detailed Pricing
-    </Button>
+    </Button> */}
   </div>
 );
 

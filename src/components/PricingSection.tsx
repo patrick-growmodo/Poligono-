@@ -154,7 +154,7 @@ const PricingSection: React.FC = () => {
         </div>
 
         {/* Pricing Cards */}
-        <div className="grid grid-cols-1  lg:grid-cols-2 gap-[32px]  mx-auto">
+        <div className="grid grid-cols-1  lg:grid-cols-1 gap-[32px] w-full md:w-[600px] lg:min-w-[536px]  mx-auto">
           {/* Pay-as-you-go Card */}
           <PricingCard
             title="Pay-as-you go"
@@ -172,7 +172,7 @@ const PricingSection: React.FC = () => {
           />
 
           {/* Committed Spend Card */}
-          <PricingCard
+          {/* <PricingCard
             title="Committed Spend"
             price="$999"
             period="/month"
@@ -186,7 +186,7 @@ const PricingSection: React.FC = () => {
             channels={committedSpendFeatures.channels}
             coverage={committedSpendFeatures.coverage}
             isPopular={true}
-          />
+          /> */}
         </div>
       </div> 
     </div>

@@ -12,11 +12,11 @@ interface FooterLink {
 
 const Footer: React.FC = () => {
   const navigationLinks: FooterLink[] = [
-    { id: '1', label: 'About', href: '/about' },
-    { id: '2', label: 'Services', href: '/services' },
-    { id: '3', label: 'Features', href: '/features' },
-    { id: '4', label: 'Pricing', href: '/pricing' },
-    { id: '5', label: 'Contact', href: '/contact' }
+    // { id: '1', label: 'About', href: '/about' },
+    { id: '2', label: 'Services', href: '/#services-section' },
+    { id: '3', label: 'Features', href: '/#features-section' },
+    { id: '4', label: 'Pricing', href: '/#pricing-section' },
+    { id: '5', label: 'Contact', href: '/#contact-section' }
   ];
 
   const subfooterLinks: FooterLink[] = [
@@ -26,7 +26,7 @@ const Footer: React.FC = () => {
   ];
 
   return (
-    <footer className="bg-[#1A1A1A] text-white">
+    <footer className="bg-dark_2 text-white">
       {/* Main Footer */}
       <div className="max-w-[1312px] mx-auto px-4 sm:px-6 lg:px-8 py-[64px] pb-[120px]">
         <div className="flex flex-col justify-between items-start">

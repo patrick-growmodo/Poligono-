@@ -131,7 +131,7 @@ const PricingCard: React.FC<PricingCardProps> = ({
               
         ))}
         {description && description.map((desc) => (
-          <div key={desc.id} className="text-[14px] text-[#000] font-normal font-inter leading-[21px] w-[100%] md:w-[100%] lg:w-[459px]">
+          <div key={desc.id} className="text-[14px] text-[#000] font-normal font-inter leading-[21px]    w-[100%] md:w-[100%] lg:w-[100%] lg:max-w-[459px]">
             {desc.text.map((item, index) => (
               <span key={item.id}>
                 {item.text}
