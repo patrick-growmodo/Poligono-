@@ -18,6 +18,7 @@ interface FilterProps {
 const Filter: React.FC<FilterProps> = ({ onFilterChange, activeFilter }) => {
   const [showIcon, setShowIcon] = useState<string | null>(activeFilter);
   const [slideText, setSlideText] = useState<string | null>(null);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
     setShowIcon(activeFilter);
@@ -30,8 +31,13 @@ const Filter: React.FC<FilterProps> = ({ onFilterChange, activeFilter }) => {
         setShowIcon(null); // Hide current icon
         onFilterChange(filterId);
         setSlideText(null); // Reset slide state
+        setIsDropdownOpen(false); // Close dropdown on mobile
       }, 200); // Wait for slide animation
     }
+  };
+
+  const handleDropdownToggle = () => {
+    setIsDropdownOpen(!isDropdownOpen);
   };
   const filterOptions: FilterOption[] = [
     {
@@ -54,9 +60,12 @@ const Filter: React.FC<FilterProps> = ({ onFilterChange, activeFilter }) => {
     }
   ];
 
+  const activeOption = filterOptions.find(option => option.id === activeFilter);
+
   return (
-    <div className="space-y-6">
-      <div className="space-y-4">
+    <div className="space-y-6"> 
+      {/* Desktop View - Hidden on mobile/tablet */}
+      <div className="hidden lg:block space-y-4">
         {filterOptions.map((option) => (
           <div
             key={option.id}
@@ -99,6 +108,85 @@ const Filter: React.FC<FilterProps> = ({ onFilterChange, activeFilter }) => {
             </div>
           </div>
         ))}
+      </div>
+
+      {/* Mobile/Tablet Dropdown - Shown only on mobile/tablet */}
+      <div className="lg:hidden relative">
+        <button
+          onClick={handleDropdownToggle}
+          className="w-full flex items-center justify-between gap-[13px] p-[16px] bg-white border border-[#E4E4E4] rounded-[8px] cursor-pointer transition-all duration-300"
+        >
+          <div className="flex items-center gap-[10px]">
+            {activeOption && showIcon === activeOption.id && (
+              <Image
+                src={activeOption.image}
+                alt={activeOption.label}
+                width={18}
+                height={18}
+                className="object-cover"
+              />
+            )}
+            <h4 
+              className="text-[16px] font-medium font-inter"
+              style={activeOption ? {
+                background: 'linear-gradient(90deg, #6940E4 0.19%, #DA46F8 99.81%)',
+                backgroundClip: 'text',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent'
+              } : {}}
+            >
+              {activeOption?.label || 'Select Option'}
+            </h4>
+          </div>
+          <svg
+            className={`w-[16px] h-[16px] transition-transform duration-200 text-gray-600 ${
+              isDropdownOpen ? 'rotate-180' : 'rotate-0'
+            }`}
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+
+        {/* Dropdown Menu */}
+        {isDropdownOpen && (
+          <div className="absolute top-full left-0 right-0 mt-[8px] bg-white border border-[#E4E4E4] rounded-[8px] shadow-lg z-10">
+            {filterOptions.map((option) => (
+              <div
+                key={option.id}
+                onClick={() => handleFilterClick(option.id)}
+                className={`cursor-pointer p-[16px] flex items-center gap-[10px] hover:bg-gray-50 transition-colors duration-200 ${
+                  activeFilter === option.id ? 'bg-purple-50' : ''
+                } ${
+                  option.id === filterOptions[filterOptions.length - 1].id ? '' : 'border-b border-[#F0F0F0]'
+                }`}
+              >
+                <Image
+                  src={option.image}
+                  alt={option.label}
+                  width={18}
+                  height={18}
+                  className="object-cover"
+                />
+                <h4 
+                  className={`text-[16px] font-medium font-inter ${
+                    activeFilter === option.id ? '' : 'text-black'
+                  }`}
+                  style={activeFilter === option.id ? {
+                    background: 'linear-gradient(90deg, #6940E4 0.19%, #DA46F8 99.81%)',
+                    backgroundClip: 'text',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent'
+                  } : {}}
+                >
+                  {option.label}
+                </h4>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

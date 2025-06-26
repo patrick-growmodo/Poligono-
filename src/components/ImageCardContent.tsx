@@ -36,19 +36,19 @@ const ImageCardContent: React.FC = () => {
       {/* Two Column Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-[0px] border-t-[1px] border-[#484848]">
         {/* Left Column */}
-        <div className="space-y-[32px] p-[64px] pb-[0px] border-r-[1px] border-[#484848]">
-          <div className="max-w-[516px]">
+        <div className="space-y-[32px] p-[64px] border-b-[1px] pb-[0px] border-r-[1px] border-[#484848] md:border-r-[0px] border-b-[1px] lg:border-r-[1px] lg:border-b-[0px]">
+          <div className="max-w-[100%] lg:max-w-[450px]">
             <h3 className="text-[22px] font-normal text-white font-inter mb-[24px] leading-[30.8px]">
               On-Brand, Every Time
             </h3>
-            <p className="text-[16px] text-[#AAAAAA] font-inter leading-[24px] max-w-[516px]">
+            <p className="text-[16px] text-[#AAAAAA] font-inter leading-[24px] max-w-[100%] lg:max-w-[516px]">
               AI agents adapt to your brand's tone, language, and personality. No generic scripts, just conversations that feel like you.
             </p>
           </div>
 
           {/* Phone Mockup */}
           <div className="relative">
-            <div className="relative w-[516px] mx-auto">
+            <div className="relative w-[100%] mx-auto md:w-[100%] lg:w-[516px]">
               <Image
                 src="/images/gallery/phone.png"
                 alt="Phone mockup showing AI conversation"
@@ -63,11 +63,11 @@ const ImageCardContent: React.FC = () => {
 
         {/* Right Column */}
         <div className="space-y-[32px] p-[64px] flex flex-col justify-between">
-          <div className="max-w-[516px]">
+          <div className="max-w-[100%] lg:max-w-[516px]">
             <h3 className="text-[22px] font-normal text-white font-inter mb-[24px] leading-[30.8px]">
               Knows Every Customer, Instantly
             </h3>
-            <p className="text-[16px] text-[#AAAAAA] font-inter leading-[24px] max-w-[516px]">
+            <p className="text-[16px] text-[#AAAAAA] font-inter leading-[24px] max-w-[100%] lg:max-w-[516px]">
               Your agents get full context with 360° customer profiles - past orders, preferences, behavior - for intelligent conversation from the first message.
             </p>
           </div>

@@ -20,7 +20,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ image, title, vendor, price }
 
           width={177.53}
           height={131.39}
-          className="object-cover rounded-[5.429px]"
+          className="object-cover rounded-[5.429px] w-[100%] md:w-[100%] lg:w-[100%]"
         /> 
       </div>
 

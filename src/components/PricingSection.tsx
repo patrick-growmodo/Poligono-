@@ -4,28 +4,141 @@ import React from 'react';
 import PricingCard from './PricingCard';
 
 const PricingSection: React.FC = () => {
-  const payAsYouGoFeatures = [
-    { id: '1', text: 'AI Agents', included: true },
-    { id: '2', text: 'Conversational marketing Agent', included: true },
-    { id: '3', text: 'Customer Service Agent', included: true },
-    { id: '4', text: 'Marketing Campaign Agent', included: true },
-    { id: '5', text: 'Alerts & Reminders Agent', included: true },
-    { id: '6', text: 'Verify Agents', included: true },
-    { id: '7', text: 'Build your own AI Agent', included: true },
-    { id: '8', text: 'Customer Profiles', included: true },
-    { id: '9', text: 'Integrations', included: true }
-  ];
+  const payAsYouGoFeatures = {
+    list_item: [
+    { 
+      id: '1', 
+      text: 'AI Agents', 
+      included: true,
+        list_item:[
+          {
+            id: '1',
+            text: 'Conversational marketing Agent',
+          },
+          {
+            id: '2',
+            text: 'Customer Service Agent',
+          },
+          {
+            id: '3',
+            text: 'Marketing Campaign Agent',
+          },
+          {
+            id: '4',
+            text: 'Alerts & Reminders Agent',
+          },
+          {
+            id: '5',
+            text: 'Verify Agents',
+          }
+        ]
+      },
+      { id: '7', text: 'Build your own AI Agent', included: true },
+      { id: '8', text: 'Customer Profiles', included: true },
+      { id: '9', text: 'Integrations', included: true }
+    ],
+    description: [
+      {
+        id: '1',
+        text: [
+          {
+            id: '1',
+            text: 'Salesforce,',
+          },
+          {
+            id: '2',
+            text: 'Hubspot,',
+          },
+          {
+            id: '3',
+            text: 'ZohoCRM,',
+          },
+          {
+            id: '4',
+            text: 'Shopify,',
+          },
+          {
+            id: '5',
+            text: 'Woocommerce,',
+          },
+          {
+            id: '6',
+            text: 'Zendesk,',
+          },
+          {
+            id: '7',
+            text: 'Freshdesk,',
+          },
+          {
+            id: '8',
+            text: 'Zohodesk and more...',
+          }
+        ]
+      }
+    ],
+    channels: [{
+      id: '1',
+      text: 'Chat',
+              icon: '/images/icons/chat.svg',
+    },
+    {
+      id: '2',
+      text: 'Voice',
+      icon: '/images/icons/voice.svg',
+    },
+    {
+      id: '3',
+      text: 'SMS',
+      icon: '/images/icons/sms.svg',
+    },
+    {
+      id: '4',
+      text: 'WhatsApp',
+      icon: '/images/icons/whatsapp.svg',
+    }
+  ],
+    coverage: ['USA, India']
+  };
 
 
-  const committedSpendFeatures = [
-    { id: '1', text: 'Programmable Voice APIs', included: true },
-    { id: '2', text: 'Verify APIs for OTP/2FA', included: true },
-    { id: '3', text: 'SIP Trunking', included: true },
-    { id: '4', text: 'Shortcodes & Custom Sender IDs', included: true },
-    { id: '5', text: 'Whitelove Onboarding & Assistance', included: true },
-    { id: '6', text: 'Custom pricing / Volume Discounts', included: true },
-    { id: '7', text: 'Single Sign-on', included: true } 
-  ];
+
+
+  const committedSpendFeatures = {
+    list_item: [
+      { id: '1', text: 'Programmable Voice APIs', included: true },
+      { id: '2', text: 'Verify APIs for OTP/2FA', included: true },
+      { id: '3', text: 'SIP Trunking', included: true },
+      { id: '4', text: 'Shortcodes & Custom Sender IDs', included: true },
+      { id: '5', text: 'Whitelove Onboarding & Assistance', included: true },
+      { id: '6', text: 'Custom pricing / Volume Discounts', included: true },
+      { id: '7', text: 'Single Sign-on', included: true }
+    ],
+    description: [],
+    channels: [
+      {
+        id: '1',
+        text: 'Chat',
+        icon: '/images/icons/chat.svg',
+      },
+      {
+        id: '2',
+        text: 'Voice',
+        icon: '/images/icons/voice.svg',
+      },
+      {
+        id: '3',
+        text: 'SMS',
+        icon: '/images/icons/sms.svg',
+      },
+      {
+        id: '4',
+        text: 'WhatsApp',
+        icon: '/images/icons/whatsapp.svg',
+      }
+    ],
+    coverage: ['All 190 countries']
+  };
+  
 
   return (
     <div className="bg-white py-[80px] px-4 sm:px-6 lg:px-8">
@@ -48,13 +161,14 @@ const PricingSection: React.FC = () => {
             price="$0"
             period="/month"
             subtitle="starts at"
-            features={payAsYouGoFeatures}
+            features={payAsYouGoFeatures.list_item}
+            description={payAsYouGoFeatures.description}
             buttonText="Request Trial"
             buttonVariant="primary"
             variant="primary"
             buttonTextColor="#ffffff"
-            channels={['Chat', 'Voice', 'SMS', 'WhatsApp']}
-            coverage="USA, India"
+            channels={payAsYouGoFeatures.channels}
+            coverage={payAsYouGoFeatures.coverage}
           />
 
           {/* Committed Spend Card */}
@@ -63,17 +177,18 @@ const PricingSection: React.FC = () => {
             price="$999"
             period="/month"
             subtitle="This plan includes all features from the Pay-as-you-go tier, plus exclusive upgrades listed below."
-            features={committedSpendFeatures}
+            features={committedSpendFeatures.list_item}
+            description={committedSpendFeatures.description}
             buttonText="Talk to Sales"
             buttonVariant="secondary"
             variant="outline"
             buttonTextColor="#11100D"
-            channels={['Chat', 'Voice', 'SMS', 'WhatsApp']}
-            coverage="All 190 countries"
+            channels={committedSpendFeatures.channels}
+            coverage={committedSpendFeatures.coverage}
             isPopular={true}
           />
         </div>
-      </div>
+      </div> 
     </div>
   );
 };

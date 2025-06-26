@@ -15,9 +15,9 @@ const FilterCardSection: React.FC = () => {
     <section className="bg-white py-[80px] px-4 sm:px-6 lg:px-8">
       <div className="max-w-[1312px] mx-auto">
         
-        <div className="flex gap-[24px]">
+        <div className="flex gap-[24px] flex-col md:flex-col lg:flex-row">
           {/* Filter Component - Left Side */}
-          <div className="w-[161px]">
+          <div className="w-full md:w-[100%] lg:w-[161px]">
             <Filter 
               onFilterChange={handleFilterChange}
               activeFilter={activeFilter}
@@ -25,7 +25,7 @@ const FilterCardSection: React.FC = () => {
           </div>
           
           {/* Card Content Component - Right Side */}
-          <div className="w-[1151px]">
+          <div className="w-full md:w-[100%] lg:w-[1151px]">
             <CardContent activeFilter={activeFilter} />
           </div>
         </div>

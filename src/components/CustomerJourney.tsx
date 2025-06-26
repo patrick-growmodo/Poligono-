@@ -15,14 +15,14 @@ const CustomerJourney: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-end  ">
           {/* Left Content */}
           <div>
-            <h2 className="w-[613px] text-4xl lg:text-5xl font-medium text-black font-inter leading-[57.6px ]">
+            <h2 className="w-full text-[48px]  md:text-[48px] lg:text-[30px] font-medium text-black font-inter leading-[57.6px ]">
               {customerJourney[0].title}
             </h2>
           </div>
           
           {/* Right Content */}
           <div>
-            <p className="text-lg font-inter text-[#2F2F2F] leading-[27px]">
+            <p className="text-[18px] md:text-[16px] lg:text-[16px] font-inter text-[#2F2F2F] leading-[27px]">
               {customerJourney[0].description}
             </p>
           </div>

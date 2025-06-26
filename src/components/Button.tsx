@@ -17,7 +17,7 @@ export const Button: React.FC<ButtonProps> = ({
   
   const variantClasses = {
     primary: 'bg-black text-white hover:bg-gray-800 rounded-full',
-    secondary: 'bg-gray-200 text-gray-900 hover:bg-gray-300 rounded-md',
+    secondary: 'bg-gray-200 text-gray-900 hover:bg-gray-300 rounded-full',
     outline: 'relative bg-transparent text-gray-800 hover:bg-pink-50 rounded-full border-0'
   }
   

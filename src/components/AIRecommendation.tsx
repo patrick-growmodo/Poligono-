@@ -29,7 +29,7 @@ const AIRecommendation: React.FC = () => {
       <div className="max-w-[1140px] mx-auto bg-[url('/images/hero/ai_card.png')] rounded-20 bg-cover bg-center bg-no-repeat pt-[36px] pb-[31px]">
         {/* AI Chat Notification */}
         <div className="mb-8">
-          <div className="bg-white opacity-[0.61] rounded-xl p-[19.124px] max-w-md mx-auto shadow-lg">
+          <div className="bg-white opacity-[0.61] rounded-xl p-[19.124px] w-[90%] sm:w-[90%] md:w-[90%] lg:w-[656.28px] mx-auto shadow-lg md:max-w-sm lg:max-w-md ">
             <div className="flex items-start space-x-3">
               {/* AI Avatar */}
               <div className="w-[64.073px] h-[64.073px]  flex items-center justify-center flex-shrink-0">
@@ -50,7 +50,7 @@ const AIRecommendation: React.FC = () => {
         </div>
 
         {/* Product Cards Container */}
-                 <div className="w-[656.28px] mx-auto bg-white rounded-xl p-[10.835px] shadow-lg">
+                 <div className="xl:w-[656.28px] lg:w-[656px] md:w-[90%] w-[70%] mx-auto bg-white rounded-xl p-[10.835px] shadow-lg ">
            <div 
              className="grid grid-cols-1 md:grid-cols-3 gap-[11.918px] bg-white "
            > {/* card_container */}

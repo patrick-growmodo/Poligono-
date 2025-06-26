@@ -26,11 +26,11 @@ const AgentActionsSection: React.FC = () => {
   const getPositionClasses = (position: string) => {
     switch (position) {
       case 'top-left':
-        return 'top-[-146px] left-[30px]';
+        return 'top-[-146px] left-[30px] md:top-[-190px] md:left-[30px] lg:top-[-190px] lg:left-[20px]';
       case 'top-right':
-        return 'top-[-146px] right-[0px]';
+        return 'top-[-146px] right-[0px] md:top-[-190px] md:right-[-20px] lg:top-[-190px] lg:right-[-20px]';
       case 'bottom-left':
-        return 'bottom-[25px] left-[190px]';
+        return 'bottom-[25px] left-[190px] md:bottom-[25px] md:left-[200px] lg:bottom-[25px] lg:left-[200px]';
       case 'bottom-right':
         return 'bottom-0 right-0';
       case 'center-left':
@@ -49,7 +49,7 @@ const AgentActionsSection: React.FC = () => {
         {/* Two Column Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-[0px]">
           {/* Left Column - Agents That Take Actions */}
-          <div className="flex flex-col justify-between space-y-[32px] p-[64px] border-r-[1px] border-[#484848] relative">
+          <div className="flex flex-col justify-between space-y-[32px] p-[64px] border-r-[1px] border-[#484848] relative md:min-h-[500px] border-r-[0px] md:border-r-[0px] md:border-b-[1px] md:border-b-[0px] lg:border-b-[0px] lg:border-t-[0px] lg:border-r-[1px]">
             <div className="max-w-[516px]">
               <h3 className="text-[22px] font-normal text-white font-inter mb-[24px] leading-[30.8px]">
                 Agents That Take Actions

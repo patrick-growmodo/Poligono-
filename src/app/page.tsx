@@ -6,7 +6,11 @@ import {
   FilterCardSection, 
   PlatformFeatures, 
   AgentWorkflowSection,
-  PricingContent
+  PricingContent,
+  TransparentPricingSection,
+  ChannelPricingSection,
+  ContactSection,
+  Footer
 } from '@/components'
 
 export default function Home() {
@@ -20,6 +24,9 @@ export default function Home() {
       <PlatformFeatures />
       <AgentWorkflowSection />
       <PricingContent />
+      <TransparentPricingSection />
+      <ContactSection />
+      <Footer />
     </main>
   )
 }  

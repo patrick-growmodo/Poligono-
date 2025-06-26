@@ -39,14 +39,29 @@ const AgentWorkflowSection: React.FC = () => {
     <section className="bg-white py-[80px] px-4 sm:px-6 lg:px-8">
       <div className="max-w-[1312px] mx-auto">
          {/* Left Column - Title and Description */}
-         <div className='flex justify-between mb-[80px] items-end'>  
+         {/* <div className='flex flex-col md:flex-row justify-between mb-[80px] items-end'>  
             <h2 className="text-[48px] font-medium text-black font-inter leading-[57.6px] w-[613px]">
               Put AI Agents to Work - in Just a Few Clicks
             </h2>
             <p className="text-[16px] text-[#666666] font-inter leading-[24px] max-w-[559px]">
-              Quickly launch prebuilt AI agents tailored to your use case, connect them to your existing tools and workflows, and go live.
+              
             </p>
-         </div>
+         </div> */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-end mb-[80px] ">
+          {/* Left Content */}
+          <div>
+            <h2 className="w-full text-[30px]  md:text-[48px] lg:text-[48px] font-medium text-black font-inter leading-[57.6px ]">
+            Put AI Agents to Work - in Just a Few Clicks
+            </h2>
+          </div>
+          
+          {/* Right Content */}
+          <div>
+            <p className="text-[18px] md:text-[16px] lg:text-[16px] font-inter text-[#2F2F2F] leading-[27px]">
+            Quickly launch prebuilt AI agents tailored to your use case, connect them to your existing tools and workflows, and go live.
+            </p>
+          </div>
+        </div>
   
         {/* Main Layout */}
         <div className="grid grid-cols-1  gap-[64px] items-start">

@@ -13,7 +13,7 @@ const ProfileCard: React.FC<{
   customGradient?: string,
 }> = ({ title, description, image, background_color, title_color, useGradientTitle = false, customGradient }) => {
   return (
-    <div className={`space-y-[16px] max-w-[516px] rounded-[8px] p-[16px] ${background_color}`}>
+    <div className={`space-y-[16px] max-w-[100%] lg:max-w-[516px] rounded-[8px] p-[16px] ${background_color}`}>
         {/* Customer Message Card */}
         <div className={`${background_color} rounded-[16px]  flex items-center gap-[26px]`}>
           <div className="relative w-[70.843px] h-[70.843px] rounded-full overflow-hidden flex-shrink-0">
