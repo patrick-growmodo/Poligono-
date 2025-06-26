@@ -16,7 +16,7 @@ const Header: React.FC = () => {
     setIsMobileMenuOpen(false);
   };
   return (
-    <header className="bg-white border-b border-gray-200 h-[76px] pt-[14px] pb-[14px] flex items-center w-full">
+    <header className="sticky top-0 z-50 bg-white border-b border-gray-200 h-[76px] pt-[14px] pb-[14px] flex items-center w-full">
       <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 max-w-[1260px]">
         <div className="flex items-center justify-between w-full">
           {/* Logo Section */}
@@ -138,29 +138,29 @@ const Header: React.FC = () => {
 
               {/* Navigation */}
               <nav className="px-4 py-6 space-y-4">
-                <Link 
+                {/* <Link 
                   href="#services-section" 
                   onClick={closeMobileMenu}
                   className="block text-black hover:text-gray-900 px-3 py-2 text-base font-medium transition-colors border-b border-gray-100 pb-4"
                 >
                   About
-                </Link>
+                </Link> */}
                 <Link 
-                  href="#features-section" 
+                  href="#services-section" 
                   onClick={closeMobileMenu}
                   className="block text-black hover:text-gray-900 px-3 py-2 text-base font-medium transition-colors border-b border-gray-100 pb-4"
                 >
                   Services
                 </Link>
                 <Link 
-                  href="#pricing-section" 
+                  href="#features-section" 
                   onClick={closeMobileMenu}
                   className="block text-black hover:text-gray-900 px-3 py-2 text-base font-medium transition-colors border-b border-gray-100 pb-4"
                 >
                   Features
                 </Link>
                 <Link 
-                  href="#contact-section" 
+                    href="#pricing-section" 
                   onClick={closeMobileMenu}
                   className="block text-black hover:text-gray-900 px-3 py-2 text-base font-medium transition-colors border-b border-gray-100 pb-4"
                 >
