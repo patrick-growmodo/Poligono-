@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Poppins , Inter, Roboto,Montserrat } from 'next/font/google'
 import './globals.css'
-import { Header } from '@/components'
+import ClientHeader from '@/components/ClientHeader'
 
 const poppins = Poppins({       
   subsets: ['latin'],
@@ -43,7 +43,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${poppins.variable} ${inter.variable} ${roboto.variable} ${montserrat.variable} ${poppins.className} ${inter.className} ${roboto.className} ${montserrat.className}`}>
-        <Header />
+        <ClientHeader />
         {children}
       </body>
     </html> 

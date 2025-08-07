@@ -21,7 +21,9 @@ const Header: React.FC = () => {
         <div className="flex items-center justify-between w-full">
           {/* Logo Section */}
           <div className="flex items-center space-x-3 ">
-            <Image src="/images/logo/logo.svg" alt="Poligono" width={154} height={33.437} />
+            <Link href="/">
+              <Image src="/images/logo/logo.svg" alt="Poligono" width={154} height={33.437} />
+            </Link>
           </div>
 
           {/* Navigation Menu and Action Buttons - Grouped Together */}

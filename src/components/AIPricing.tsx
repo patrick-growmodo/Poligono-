@@ -71,7 +71,7 @@ const AIPricing: React.FC = () => {
          
          {/* Left Column - 60% (3/5) */}
          <div className="xl:col-span-3 lg:col-span-5 md:col-span-1">
-           <div className="bg-white rounded-[8px] border border-[#E4E4E4] p-[48px] flex flex-col  gap-[64px]">
+           <div className="bg-white rounded-[6px] border border-[#E4E4E4] p-[48px] flex flex-col  gap-[64px]">
              <h4 className="text-[20px] font-semibold text-[#11100D] font-inter">
                AI Agent Pricing
              </h4>
@@ -81,7 +81,7 @@ const AIPricing: React.FC = () => {
 
          {/* Right Column - 40% (2/5) */}
          <div className="xl:col-span-2 lg:col-span-5 h-full">
-           <div className="bg-white rounded-[8px] border border-[#E4E4E4] p-[48px] h-full flex flex-col  gap-[64px]">
+           <div className="bg-white rounded-[6px] border border-[#E4E4E4] p-[48px] h-full flex flex-col  gap-[64px]">
              <h4 className="text-[20px] font-semibold text-[#11100D] font-inter">
                AI Agent Skills
              </h4>

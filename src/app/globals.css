@@ -48,3 +48,54 @@ body {
     width: 100% !important;
   }
 }
+
+/* Swiper pagination styles */
+.swiper-pagination {
+  position: relative !important;
+  margin-top: 2rem !important;
+}
+
+.swiper-pagination-bullet {
+  width: 100px !important;
+  height: 2px !important;
+  background: rgba(255, 255, 255, 0.3) !important;
+  opacity: 1 !important;
+  margin: 0 4px !important;
+  transition: all 0.3s ease !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: rgba(255, 255, 255, 1) !important;
+  transform: scale(1.2) !important; 
+}
+
+/* Custom pagination styles for register page */
+/* Position pagination inside the slide content */
+.register-slider .swiper-pagination {
+  position: absolute !important;
+  bottom: 50px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 100px !important;
+  margin: 0 !important;
+  z-index: 10 !important;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.register-pagination-bullet {
+  width: 33.33px !important;
+  height: 2px !important;
+  background: rgba(255, 255, 255, 0.3) !important;
+  opacity: 1 !important;
+  /* margin: 0 4px !important; */
+  border-radius: 50% !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+}
+
+.register-pagination-bullet-active {
+  background: #DA46F8 !important;
+
+}

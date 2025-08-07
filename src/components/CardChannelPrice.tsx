@@ -17,7 +17,7 @@ interface CardChannelPriceProps {
 }
 
 const CardChannelPrice: React.FC<CardChannelPriceProps> = ({ channel }) => (
-  <div className="bg-white rounded-[8px] p-[32px] flex flex-col gap-[48px] border border-[#E4E4E4]">
+  <div className="bg-white rounded-[6px] p-[32px] flex flex-col gap-[48px] border border-[#E4E4E4]">
     <div>
         <h3 className="text-[20px] font-semibold text-[#11100D] font-inter mb-[8px]">
         {channel.title}

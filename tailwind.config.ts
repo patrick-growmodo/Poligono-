@@ -34,6 +34,7 @@ const config: Config = {
           'custom-2': '0px 2.152px 3.767px 0px rgba(30, 12, 84, 0.38) inset, -2.152px 2.152px 11.3px 0px rgba(105, 64, 228, 0.35);',
           'custom-3': '0px 2px 3.5px 0px rgba(30, 12, 84, 0.38) inset, -2px 2px 10.5px 0px rgba(105, 64, 228, 0.35)',
           'custom-4': 'linear-gradient(90deg, #6940E4 -8.03%, #DA46F8 105.34%);',
+          'custom-5': 'linear-gradient(90deg, #DA46F8, #6940E4)',
         },
         animation: {
           'marquee': 'marquee 20s linear infinite',
