@@ -97,5 +97,34 @@ body {
 
 .register-pagination-bullet-active {
   background: #DA46F8 !important;
-
 }
+
+/* Dark mode gradient background for auth pages */
+.auth-dark-gradient {
+  background: white;
+}
+
+@media (prefers-color-scheme: dark) {
+  .auth-dark-gradient {
+    background: linear-gradient(146deg, #191919 0.2%, #0B0A09 73.63%), #FFF;
+  }
+}
+.border_custom{
+  position: relative;
+}
+.border_custom::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(
+      to bottom,
+      #4346ED 0%,
+      #DA46FB 18%,
+      #DA46FB 76%,
+      #4346ED 89%,
+      #6940E4 100%
+    );
+  }

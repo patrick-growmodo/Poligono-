@@ -22,7 +22,7 @@ const Header: React.FC = () => {
           {/* Logo Section */}
           <div className="flex items-center space-x-3 ">
             <Link href="/">
-              <Image src="/images/logo/logo.svg" alt="Poligono" width={154} height={33.437} />
+              <Image src="/images/logo/logo-light.svg" alt="Poligono" width={154} height={33.437} className="h-auto block " />
             </Link>
           </div>
 

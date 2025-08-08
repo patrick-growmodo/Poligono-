@@ -33,6 +33,43 @@ export default function ForgotPasswordPage() {
     }
   }, [currentStep]);
 
+  // Dark mode detection for auth pages
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme');
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    
+    const applyTheme = (isDark: boolean) => {
+      if (isDark) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    };
+
+    if (savedTheme) {
+      // Use saved preference
+      applyTheme(savedTheme === 'dark');
+    } else {
+      // Follow system preference
+      applyTheme(mediaQuery.matches);
+    }
+
+    // Listen for system preference changes
+    const handleSystemThemeChange = (e: MediaQueryListEvent) => {
+      // Only auto-update if user hasn't manually set a preference
+      if (!localStorage.getItem('theme')) {
+        applyTheme(e.matches);
+      }
+    };
+
+    mediaQuery.addEventListener('change', handleSystemThemeChange);
+
+    // Cleanup
+    return () => {
+      mediaQuery.removeEventListener('change', handleSystemThemeChange);
+    };
+  }, []);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -158,7 +195,7 @@ export default function ForgotPasswordPage() {
   };
 
   const getCodeInputStyling = (digit: string) => {
-    const baseClasses = "w-[110px] h-[110px] text-center text-[56px] font-medium rounded-[16px] focus:outline-none focus:ring-2 focus:ring-[#DA46F8] focus:border-transparent font-inter text-black";
+    const baseClasses = "w-[110px] h-[110px] text-center text-[56px] font-medium rounded-[16px] focus:outline-none focus:ring-2 focus:ring-[#DA46F8] focus:border-transparent font-inter text-black dark:text-white bg-transparent";
     
     if (codeValidation === 'correct') {
       return `${baseClasses} bg-green-50 border-2 border-green-500`;
@@ -177,7 +214,7 @@ export default function ForgotPasswordPage() {
         return (
           <form onSubmit={handleSubmitStep} className="mt-[46px]">
             <div className="mb-[32px]">
-              <label htmlFor="email" className="block text-[16px] font-medium text-[#374151] font-inter mb-[8px]">
+              <label htmlFor="email" className="block text-[16px] font-medium text-[#374151] dark:text-white font-inter mb-[8px]">
                 Email
               </label>
               <input
@@ -187,7 +224,7 @@ export default function ForgotPasswordPage() {
                 value={formData.email}
                 onChange={handleInputChange}
                 placeholder="Enter your email"
-                className="w-full p-[14px_16px]  bg-[#F6F6F6] rounded-[6px] text-[14px] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#DA46F8] focus:border-transparent font-inter text-black leading-[24px]"
+                className="w-full p-[14px_16px] bg-[#F6F6F6] dark:bg-[#333] rounded-[6px] text-[14px] placeholder-[#9CA3AF] dark:placeholder-[#A6A6A6] focus:outline-none focus:ring-2 focus:ring-[#DA46F8] focus:border-transparent font-inter text-black dark:text-white border dark:border-gray-600 leading-[24px]"
                 required
               />
             </div>
@@ -240,7 +277,7 @@ export default function ForgotPasswordPage() {
             </button>
                           <div className="text-center"
                           style={{marginTop: '28px !important'}}>
-                <p className="text-[14px] text-[#6B7280] font-inter">
+                <p className="text-[14px] text-[#6B7280] dark:text-gray-400 font-inter">
                 Didn't receive the code?{' '}
                   <button
                     type="button"
@@ -266,7 +303,7 @@ export default function ForgotPasswordPage() {
           <form onSubmit={handleSubmitStep} className="space-y-6">
             <div className="space-y-4">
                               <div className="space-y-2">
-                  <label htmlFor="newPassword" className="block text-[14px] font-medium text-[#374151] font-inter">
+                  <label htmlFor="newPassword" className="block text-[14px] font-medium text-[#374151] dark:text-white font-inter">
                     Password
                   </label>
                   <input
@@ -276,7 +313,7 @@ export default function ForgotPasswordPage() {
                     value={formData.newPassword}
                     onChange={handleInputChange}
                     placeholder="Enter your password"
-                    className="w-full p-[14px_16px]  bg-[#F6F6F6] rounded-[6px] text-[14px] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#DA46F8] focus:border-transparent font-inter text-black"
+                    className="w-full p-[14px_16px] bg-[#F6F6F6] dark:bg-[#333] rounded-[6px] text-[14px] placeholder-[#9CA3AF] dark:placeholder-[#A6A6A6] focus:outline-none focus:ring-2 focus:ring-[#DA46F8] focus:border-transparent font-inter text-black dark:text-white border dark:border-gray-600"
                     required
                   />
                   {/* Password Strength Indicator */}
@@ -289,13 +326,13 @@ export default function ForgotPasswordPage() {
                             className={`flex-1 h-[5.109px] rounded-full transition-all duration-300 ${
                               bar <= passwordStrength 
                                 ? 'bg-[#D376FF]' 
-                                : 'bg-[#F6F6F6]'
+                                : 'bg-[#F6F6F6] dark:bg-[#333]'
                             }`}
                           />
                         ))}
                       </div>
                       {/* <div className="mt-2">
-                        <p className="text-[12px] text-[#6B7280] font-inter">
+                        <p className="text-[12px] text-[#6B7280] dark:text-gray-400 font-inter">
                           {passwordStrength === 0 && 'Very weak'}
                           {passwordStrength === 1 && 'Weak'}
                           {passwordStrength === 2 && 'Fair'}
@@ -308,7 +345,7 @@ export default function ForgotPasswordPage() {
                   )}
                 </div>
               <div className="space-y-2">
-                <label htmlFor="confirmPassword" className="block text-[14px] font-medium text-[#374151] font-inter">
+                <label htmlFor="confirmPassword" className="block text-[14px] font-medium text-[#374151] dark:text-white font-inter">
                   Confirm password
                 </label>
                 <input
@@ -318,7 +355,7 @@ export default function ForgotPasswordPage() {
                   value={formData.confirmPassword}
                   onChange={handleInputChange}
                   placeholder="Enter your password"
-                  className="w-full p-[14px_16px]  bg-[#F6F6F6] rounded-[6px] text-[14px] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#DA46F8] focus:border-transparent font-inter text-black"
+                  className="w-full p-[14px_16px] bg-[#F6F6F6] dark:bg-[#333] rounded-[6px] text-[14px] placeholder-[#9CA3AF] dark:placeholder-[#A6A6A6] focus:outline-none focus:ring-2 focus:ring-[#DA46F8] focus:border-transparent font-inter text-black dark:text-white border dark:border-gray-600"
                   required
                 />
               </div>
@@ -352,30 +389,39 @@ export default function ForgotPasswordPage() {
   };
 
   return (
-    <div className="h-screen flex">
+    <div className="h-screen flex auth-dark-gradient">
       {/* Left Panel */}
-      <div className="flex-1 flex flex-col bg-white">
+      <div className="flex-1 flex flex-col">
         <div className="flex-1 flex items-center justify-center">
           <div className="w-full max-w-[480px] space-y-8">
             {/* Logo */}
             <div className="mb-[39px]">
               <Link href="/">
+                {/* Light mode logo */}
                 <Image 
-                  src="/images/logo/logo.svg" 
+                  src="/images/logo/logo-light.svg" 
                   alt="Poligono" 
                   width={170} 
                   height={26} 
-                  className="h-auto"
+                  className="h-auto block dark:hidden"
+                />
+                {/* Dark mode logo */}
+                <Image 
+                  src="/images/logo/logo-dark.svg" 
+                  alt="Poligono" 
+                  width={170} 
+                  height={26} 
+                  className="h-auto hidden dark:block"
                 />
               </Link>
             </div>
 
             {/* Header */}
             <div className="">
-              <h1 className="text-[40px] font-medium text-black font-inter leading-tight">
+              <h1 className="text-[40px] font-medium text-black dark:text-white font-inter leading-tight">
                 {getStepTitle()}
               </h1>
-              <p className="text-[16px] text-[#11100D] font-inter font-normal tracking-normal leading-[24px] mt-[12px]">
+              <p className="text-[16px] text-[#11100D] dark:text-white font-inter font-normal tracking-normal leading-[24px] mt-[12px]">
                 {getStepDescription()}
               </p>
             </div>
@@ -389,7 +435,7 @@ export default function ForgotPasswordPage() {
                 style={{marginTop: '28px !important'}}>
                     <Link 
                     href="/login"
-                    className="inline-flex items-center gap-2 text-[16px] text-[#6B7280] hover:text-[#DA46F8] transition-colors font-inter"
+                    className="inline-flex items-center gap-2 text-[16px] text-[#6B7280] dark:text-gray-400 hover:text-[#DA46F8] transition-colors font-inter"
                     >
                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
                         <path fillRule="evenodd" clipRule="evenodd" d="M7.78033 7.82904C8.07322 8.12194 8.07322 8.59681 7.78033 8.88971L5.31066 11.3594H21.5C21.9142 11.3594 22.25 11.6952 22.25 12.1094C22.25 12.5236 21.9142 12.8594 21.5 12.8594H5.31066L7.78033 15.329C8.07322 15.6219 8.07322 16.0968 7.78033 16.3897C7.48744 16.6826 7.01256 16.6826 6.71967 16.3897L2.96967 12.6397C2.67678 12.3468 2.67678 11.8719 2.96967 11.579L6.71967 7.82904C7.01256 7.53615 7.48744 7.53615 7.78033 7.82904Z" fill="#575555"/>
@@ -412,7 +458,7 @@ export default function ForgotPasswordPage() {
                 className={`flex-1 h-[4px] rounded-full transition-all duration-300 ${
                   step <= currentStep 
                     ? 'bg-[#DA46F8]' 
-                    : 'bg-[#F6F6F6]'
+                    : 'bg-[#F6F6F6] dark:bg-[#333]'
                 }`}
               />
             ))}
@@ -421,7 +467,7 @@ export default function ForgotPasswordPage() {
       </div>
 
       {/* Right Panel */}
-      <div className="hidden lg:flex flex-1 relative p-[12px] pl-0 bg-white">
+      <div className="hidden lg:flex flex-1 relative p-[12px] pl-0">
         <Image src="/images/hero/login-card.png" alt="Poligono" width={1000} height={1000} className='w-full h-full object-cover rounded-[20px]' />
       </div>
     </div>

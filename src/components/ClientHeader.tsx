@@ -6,8 +6,8 @@ import Header from './Header';
 const ClientHeader = () => {
   const pathname = usePathname();
   
-  // Don't show header on auth pages
-  if (pathname === '/login' || pathname === '/register' || pathname === '/forgot-password') {
+  // Don't show header on auth pages and dashboard
+  if (pathname === '/login' || pathname === '/register' || pathname === '/forgot-password' || pathname === '/dashboard' || pathname === '/agents' || pathname === '/notifications' || pathname === '/plans' || pathname === '/settings') {
     return null;
   }
   

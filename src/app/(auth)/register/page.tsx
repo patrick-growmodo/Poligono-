@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -26,6 +26,43 @@ export default function RegisterPage() {
 
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  // Dark mode detection for auth pages
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme');
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    
+    const applyTheme = (isDark: boolean) => {
+      if (isDark) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    };
+
+    if (savedTheme) {
+      // Use saved preference
+      applyTheme(savedTheme === 'dark');
+    } else {
+      // Follow system preference
+      applyTheme(mediaQuery.matches);
+    }
+
+    // Listen for system preference changes
+    const handleSystemThemeChange = (e: MediaQueryListEvent) => {
+      // Only auto-update if user hasn't manually set a preference
+      if (!localStorage.getItem('theme')) {
+        applyTheme(e.matches);
+      }
+    };
+
+    mediaQuery.addEventListener('change', handleSystemThemeChange);
+
+    // Cleanup
+    return () => {
+      mediaQuery.removeEventListener('change', handleSystemThemeChange);
+    };
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -73,27 +110,36 @@ export default function RegisterPage() {
   ];
 
   return (
-    <div className="h-screen flex">
+    <div className="h-screen flex auth-dark-gradient">
       {/* Left Panel - Registration Form (50% on desktop, 100% on mobile) */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center bg-white px-8 py-12">
+      <div className="w-full lg:w-1/2 flex items-center justify-center  px-8 py-12">
         <div className="w-full max-w-[480px] space-y-8">
           {/* Logo */}
           <div className="mb-12">
+            {/* Light mode logo */}
             <Image 
-              src="/images/logo/logo.svg" 
+              src="/images/logo/logo-light.svg" 
               alt="Poligono" 
-              width={120} 
+              width={170} 
               height={26} 
-              className="h-auto"
+              className="h-auto block dark:hidden"
+            />
+            {/* Dark mode logo */}
+            <Image 
+              src="/images/logo/logo-dark.svg" 
+              alt="Poligono" 
+              width={170} 
+              height={26} 
+              className="h-auto hidden dark:block"
             />
           </div>
 
           {/* Header */}
           <div className="space-y-2">
-            <h1 className="text-[32px] font-semibold text-black font-inter leading-tight">
+            <h1 className="text-[32px] font-semibold text-black dark:text-white font-inter leading-tight">
               Create Account
             </h1>
-            <p className="text-[14px] text-[#6B7280] font-inter">
+            <p className="text-[14px] text-[#6B7280] dark:text-gray-400 font-inter">
               Enter your credentials to create your account and sign up
             </p>
           </div>
@@ -101,7 +147,7 @@ export default function RegisterPage() {
           {/* Google Signup Button */}
           <button
             onClick={handleGoogleSignup}
-            className="w-full flex items-center justify-center gap-3 p-[14px_16px]  bg-[#F6F6F6] rounded-[6px]  hover:bg-gray-50 transition-colors"
+            className="w-full flex items-center justify-center gap-3 p-[14px_16px] bg-[#F6F6F6] dark:bg-[#333] rounded-[6px] hover:bg-gray-50 dark:hover:bg-[#404040] transition-colors border dark:border-gray-600"
           >
             <svg width="20" height="20" viewBox="0 0 24 24">
               <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -109,7 +155,7 @@ export default function RegisterPage() {
               <path fill="#FBBC04" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
               <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
             </svg>
-            <span className="text-[14px] text-[#374151] font-medium font-inter">
+            <span className="text-[14px] text-[#374151] dark:text-white font-medium font-inter">
               Sign up with Google
             </span>
           </button>
@@ -117,10 +163,10 @@ export default function RegisterPage() {
           {/* Divider */}
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-[#E5E7EB]" />
+              <div className="w-full border-t border-[#E5E7EB] dark:border-gray-600" />
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-4 bg-white text-[#9CA3AF] font-inter">or</span>
+              <span className="px-4 text-[#9CA3AF] dark:text-gray-400 font-inter">or</span>
             </div>
           </div>
 
@@ -130,7 +176,7 @@ export default function RegisterPage() {
             <div className="grid grid-cols-2 gap-4">
               {/* First Name */}
               <div className="space-y-2">
-                <label htmlFor="firstName" className="block text-[14px] font-medium text-[#374151] font-inter text-black">
+                <label htmlFor="firstName" className="block text-[14px] font-medium text-[#374151] dark:text-white font-inter">
                   First name
                 </label>
                 <input
@@ -140,14 +186,14 @@ export default function RegisterPage() {
                   value={formData.firstName}
                   onChange={handleInputChange}
                   placeholder="eg. John"
-                  className="bg-[#F6F6F6] w-full p-[14px_16px]  rounded-[6px] text-[14px] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#DA46F8] focus:border-transparent font-inter text-black"
+                  className="bg-[#F6F6F6] dark:bg-[#333] w-full p-[14px_16px] rounded-[6px] text-[14px] placeholder-[#9CA3AF] dark:placeholder-[#A6A6A6] focus:outline-none focus:ring-2 focus:ring-[#DA46F8] focus:border-transparent font-inter text-black dark:text-white border dark:border-gray-600"
                   required
                 />
               </div>
 
               {/* Last Name */}
               <div className="space-y-2">
-                <label htmlFor="lastName" className="block text-[14px] font-medium text-[#374151] font-inter">
+                <label htmlFor="lastName" className="block text-[14px] font-medium text-[#374151] dark:text-white font-inter">
                   Last name
                 </label>
                 <input
@@ -157,7 +203,7 @@ export default function RegisterPage() {
                   value={formData.lastName}
                   onChange={handleInputChange}
                   placeholder="eg. Francisco"
-                  className="bg-[#F6F6F6] w-full p-[14px_16px] rounded-[6px] text-[14px] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#DA46F8] focus:border-transparent font-inter text-black"
+                  className="bg-[#F6F6F6] dark:bg-[#333] w-full p-[14px_16px] rounded-[6px] text-[14px] placeholder-[#9CA3AF] dark:placeholder-[#A6A6A6] focus:outline-none focus:ring-2 focus:ring-[#DA46F8] focus:border-transparent font-inter text-black dark:text-white border dark:border-gray-600"
                   required
                 />
               </div>
@@ -165,7 +211,7 @@ export default function RegisterPage() {
 
             {/* Email Field */}
             <div className="space-y-2">
-              <label htmlFor="email" className="block text-[14px] font-medium text-[#374151] font-inter">
+              <label htmlFor="email" className="block text-[14px] font-medium text-[#374151] dark:text-white font-inter">
                 Email
               </label>
               <input
@@ -175,14 +221,14 @@ export default function RegisterPage() {
                 value={formData.email}
                 onChange={handleInputChange}
                 placeholder="eg. johnfrans@gmail.com"
-                className="w-full p-[14px_16px] bg-[#F6F6F6] rounded-[6px] text-[14px] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#DA46F8] focus:border-transparent font-inter text-black"
+                className="w-full p-[14px_16px] bg-[#F6F6F6] dark:bg-[#333] rounded-[6px] text-[14px] placeholder-[#9CA3AF] dark:placeholder-[#A6A6A6] focus:outline-none focus:ring-2 focus:ring-[#DA46F8] focus:border-transparent font-inter text-black dark:text-white border dark:border-gray-600"
                 required
               />
             </div>
 
             {/* Password Field */}
             <div className="space-y-2">
-              <label htmlFor="password" className="block text-[14px] font-medium text-[#374151] font-inter">
+              <label htmlFor="password" className="block text-[14px] font-medium text-[#374151] dark:text-white font-inter">
                 Password
               </label>
               <div className="relative">
@@ -193,13 +239,13 @@ export default function RegisterPage() {
                   value={formData.password}
                   onChange={handleInputChange}
                   placeholder="Enter your password"
-                  className="w-full p-[14px_16px] pr-12 bg-[#F6F6F6] rounded-[6px] text-[14px] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#DA46F8] focus:border-transparent font-inter text-black"
+                  className="w-full p-[14px_16px] pr-12 bg-[#F6F6F6] dark:bg-[#333] rounded-[6px] text-[14px] placeholder-[#9CA3AF] dark:placeholder-[#A6A6A6] focus:outline-none focus:ring-2 focus:ring-[#DA46F8] focus:border-transparent font-inter text-black dark:text-white border dark:border-gray-600"
                   required
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#9CA3AF] hover:text-[#374151]"
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#9CA3AF] dark:text-gray-400 hover:text-[#374151] dark:hover:text-gray-300"
                 >
                   {showPassword ? (
                     <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -232,7 +278,7 @@ export default function RegisterPage() {
 
             {/* Sign In Link */}
             <div className="text-center pt-2">
-              <p className="text-[14px] text-[#6B7280] font-inter">
+              <p className="text-[14px] text-[#6B7280] dark:text-gray-400 font-inter">
                 Already have an account?{' '}
                 <Link 
                   href="/login"
@@ -252,7 +298,7 @@ export default function RegisterPage() {
         </div>
       </div>
       {/* Right Panel - Slider (50%) */}
-      <div className="hidden lg:flex w-1/2 relative p-[12px] pl-0 bg-white">
+      <div className="hidden lg:flex w-1/2 relative p-[12px] pl-0">
         <div className="relative w-full h-full flex items-center justify-center">
                       <Swiper
               modules={[Pagination, Autoplay, EffectFade, Navigation]}

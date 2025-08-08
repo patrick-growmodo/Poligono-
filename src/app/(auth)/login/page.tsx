@@ -1,8 +1,15 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination, Autoplay ,EffectFade, Navigation} from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/effect-fade';
+
 
 interface LoginFormData {
   email: string;
@@ -19,6 +26,43 @@ export default function LoginPage() {
 
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  // Dark mode detection for auth pages
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme');
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    
+    const applyTheme = (isDark: boolean) => {
+      if (isDark) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    };
+
+    if (savedTheme) {
+      // Use saved preference
+      applyTheme(savedTheme === 'dark');
+    } else {
+      // Follow system preference
+      applyTheme(mediaQuery.matches);
+    }
+
+    // Listen for system preference changes
+    const handleSystemThemeChange = (e: MediaQueryListEvent) => {
+      // Only auto-update if user hasn't manually set a preference
+      if (!localStorage.getItem('theme')) {
+        applyTheme(e.matches);
+      }
+    };
+
+    mediaQuery.addEventListener('change', handleSystemThemeChange);
+
+    // Cleanup
+    return () => {
+      mediaQuery.removeEventListener('change', handleSystemThemeChange);
+    };
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
@@ -46,42 +90,67 @@ export default function LoginPage() {
   const handleGoogleLogin = () => {
     console.log('Google login clicked');
   };
-
+  const sliderContent = [
+    {
+      title: "Connect with your own AI Agent",
+      description: "Lorem ipsum dolor sit amet consectetuer adipiscing elit, sed diam non ummy nibh",
+      image: "/images/hero/register1.png"
+    },
+    {
+      title: "Automate Your Workflow",
+      description: "Streamline your business processes with intelligent automation and smart integrations",
+      image: "/images/hero/register2.png"
+    },
+    {
+      title: "Scale Your Business",
+      description: "Grow your business with powerful AI-driven insights and analytics",
+      image: "/images/hero/register3.png"
+    }
+  ];
   return (
-    <div className="h-screen flex">
+    <div className="h-screen flex auth-dark-gradient">
       {/* Left Panel - Login Form */}
-      <div className="flex-1 flex items-center justify-center bg-white">
+      <div className="flex-1 flex items-center justify-center ">
         <div className="w-full max-w-[480px] space-y-8">
           {/* Logo */}
           <div className="mb-[39px]">
             <Link href="/">
-            <Image 
-              src="/images/logo/logo.svg" 
-              alt="Poligono" 
-              width={170} 
-              height={26} 
-              className="h-auto"
-            />
+              {/* Light mode logo */}
+              <Image 
+                src="/images/logo/logo-light.svg" 
+                alt="Poligono" 
+                width={170} 
+                height={26} 
+                className="h-auto block dark:hidden"
+              />
+              {/* Dark mode logo */}
+              <Image 
+                src="/images/logo/logo-dark.svg" 
+                alt="Poligono" 
+                width={170} 
+                height={26} 
+                className="h-auto hidden dark:block"
+              />
             </Link>
           </div>
 
           {/* Header */}
           <div className="space-y-2">
-            <h1 className="text-[40px] font-medium text-black font-inter leading-tight">
+            <h1 className="text-[40px] font-medium text-black dark:text-white font-inter leading-tight">
               Log in
             </h1>
-            <p className="text-[18px] text-[#11100D] font-inter font-normal tracking-normal	">
+            <p className="text-[18px] text-[#11100D] dark:text-white font-inter font-normal tracking-normal	">
               Hey there, welcome back! Select method to log in
-            </p>
+            </p> 
           </div>
 
           {/* Google Login Button */}
           <button
             onClick={handleGoogleLogin}
-            className="w-full flex items-center justify-center gap-3 p-[14px_16px]   rounded-[6px] bg-[#F6F6F6] hover:bg-[#F6F6F6] transition-colors"
+            className="w-full flex items-center justify-center gap-3 p-[14px_16px] rounded-[6px] bg-[#F6F6F6] dark:bg-[#333] hover:bg-gray-50 dark:hover:bg-[#404040] transition-colors border dark:border-gray-600"
           >
             <Image src="/images/icons/google-icon.svg" alt="Google" width={20} height={20} />
-            <span className="text-[14px] text-[#374151] font-medium font-inter">
+            <span className="text-[14px] text-[#374151] dark:text-white font-medium font-inter">
               Log in with Google
             </span>
           </button>
@@ -89,10 +158,10 @@ export default function LoginPage() {
           {/* Divider */}
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-[#E5E7EB]" />
+              <div className="w-full border-t border-[#E5E7EB] dark:border-gray-600" />
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-4 bg-white text-[#9CA3AF] font-inter">or</span>
+              <span className="px-4 auth-dark-gradient text-[#9CA3AF] dark:text-gray-400 font-inter">or</span>
             </div>
           </div>
 
@@ -100,7 +169,7 @@ export default function LoginPage() {
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Email Field */}
             <div className="space-y-2">
-              <label htmlFor="email" className="block text-[14px] font-medium text-[#374151] font-inter">
+              <label htmlFor="email" className="block text-[14px] font-medium text-[#374151] dark:text-white font-inter">
                 Email
               </label>
               <input
@@ -110,14 +179,14 @@ export default function LoginPage() {
                 value={formData.email}
                 onChange={handleInputChange}
                 placeholder="eg. johnfrans@gmail.com"
-                className="w-full p-[14px_16px] bg-[#F6F6F6]  rounded-[6px] text-[14px] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#DA46F8] focus:border-transparent font-inter text-black"
+                className="w-full p-[14px_16px] bg-[#F6F6F6] dark:bg-[#333] rounded-[6px] text-[14px] placeholder-[#9CA3AF] dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#DA46F8] focus:border-transparent font-inter text-black dark:text-white border dark:border-gray-600"
                 required
               />
             </div>
 
             {/* Password Field */}
             <div className="space-y-2">
-              <label htmlFor="password" className="block text-[14px] font-medium text-[#374151] font-inter">
+              <label htmlFor="password" className="block text-[14px] font-medium text-[#374151] dark:text-white font-inter">
                 Password
               </label>
               <div className="relative">
@@ -128,13 +197,13 @@ export default function LoginPage() {
                   value={formData.password}
                   onChange={handleInputChange}
                   placeholder="Enter your password"
-                  className="w-full p-[14px_16px] pr-12 bg-[#F6F6F6]  rounded-[6px] text-[14px] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#DA46F8] focus:border-transparent font-inter text-black "
+                  className="w-full p-[14px_16px] pr-12 bg-[#F6F6F6] dark:bg-[#333] rounded-[6px] text-[14px] placeholder-[#9CA3AF] dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#DA46F8] focus:border-transparent font-inter text-black dark:text-white border dark:border-gray-600"
                   required
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#9CA3AF] hover:text-[#374151]"
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#9CA3AF] dark:text-gray-400 hover:text-[#374151] dark:hover:text-gray-300"
                 >
                   {showPassword ? (
                     <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -178,7 +247,7 @@ export default function LoginPage() {
                       transition-all duration-200
                       ${formData.rememberMe 
                         ? 'bg-[#DA46F8] border-[#DA46F8]' 
-                        : 'bg-white border-[#E5E7EB] hover:border-[#DA46F8]'
+                        : 'bg-white dark:bg-[#333] border-[#E5E7EB] dark:border-gray-600 hover:border-[#DA46F8]'
                       }
                     `}>
                       {formData.rememberMe && (
@@ -193,7 +262,7 @@ export default function LoginPage() {
                         </svg>
                       )}
                     </div>
-                    <span className="ml-2 text-[14px] text-[#374151] font-inter">
+                    <span className="ml-2 text-[14px] text-[#374151] dark:text-white font-inter">
                       Remember me
                     </span>
                   </label>
@@ -202,7 +271,7 @@ export default function LoginPage() {
               
               <Link 
                 href="/forgot-password"
-                className="text-[14px] text-[#6B7280] hover:text-[#DA46F8] transition-colors font-inter"
+                className="text-[14px] text-[#6B7280] dark:text-gray-400 hover:text-[#DA46F8] transition-colors font-inter"
               >
                 Forgot password?
               </Link>
@@ -219,7 +288,7 @@ export default function LoginPage() {
 
             {/* Sign Up Link */}
             <div className="text-center">
-              <p className="text-[16px] text-[#6B7280] font-inter">
+              <p className="text-[16px] text-[#6B7280] dark:text-gray-400 font-inter">
                 Don't have an account?{' '}
                 <Link 
                   href="/register"
@@ -240,8 +309,53 @@ export default function LoginPage() {
       </div>
 
       {/* Right Panel - Purple Gradient with Geometric Shapes */}
-      <div className="hidden lg:flex flex-1 relative p-[12px] pl-0 bg-white">
+      {/* <div className="hidden lg:flex flex-1 relative p-[12px] pl-0 bg-white">
         <Image src="/images/hero/login-card.png" alt="Poligono" width={1000} height={1000} className='w-full h-full object-cover rounded-[20px]' />
+      </div> */}
+
+<div className="hidden lg:flex w-1/2 relative p-[12px] pl-0 ">
+        <div className="relative w-full h-full flex items-center justify-center">
+                      <Swiper
+              modules={[Pagination, Autoplay, EffectFade, Navigation]}
+              spaceBetween={0}
+              slidesPerView={1}
+              pagination={{
+                clickable: true,
+                bulletClass: 'register-pagination-bullet',
+                bulletActiveClass: 'register-pagination-bullet-active',
+              }}
+              effect={'fade'}
+              autoplay={{
+                delay: 4000,
+                disableOnInteraction: false,
+              }}
+              loop={true}
+              className="w-full h-full register-slider"
+            >
+            {sliderContent.map((slide, index) => (
+              <SwiperSlide key={index}>
+                <div className="relative w-full h-full">
+                  <Image 
+                    src={slide.image} 
+                    alt={slide.title} 
+                    fill
+                    className="object-cover rounded-[20px]" 
+                  />
+                  <div className="absolute bottom-[44px] left-0 w-full flex items-end justify-center p-8">
+                    <div className="w-full max-w-[480px] space-y-4 text-center">
+                      <h2 className="text-[24px] font-semibold text-white font-inter leading-tight">
+                        {slide.title}
+                      </h2>
+                      <p className="text-[16px] text-white font-inter leading-relaxed">
+                        {slide.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
       </div>
     </div>
   );
