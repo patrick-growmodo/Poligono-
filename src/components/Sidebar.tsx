@@ -26,8 +26,12 @@ export default function Sidebar({ activeItem, onItemSelect }: SidebarProps) {
       setIsDarkMode(isDark);
       if (isDark) {
         document.documentElement.classList.add('dark');
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.body.classList.add('dark-theme');
       } else {
         document.documentElement.classList.remove('dark');
+        document.documentElement.setAttribute('data-theme', 'light');
+        document.body.classList.remove('dark-theme');
       }
     } else {
       // Follow system preference
@@ -36,8 +40,12 @@ export default function Sidebar({ activeItem, onItemSelect }: SidebarProps) {
       setIsDarkMode(systemIsDark);
       if (systemIsDark) {
         document.documentElement.classList.add('dark');
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.body.classList.add('dark-theme');
       } else {
         document.documentElement.classList.remove('dark');
+        document.documentElement.setAttribute('data-theme', 'light');
+        document.body.classList.remove('dark-theme');
       }
     }
 
@@ -48,8 +56,12 @@ export default function Sidebar({ activeItem, onItemSelect }: SidebarProps) {
         setIsDarkMode(e.matches);
         if (e.matches) {
           document.documentElement.classList.add('dark');
+          document.documentElement.setAttribute('data-theme', 'dark');
+          document.body.classList.add('dark-theme');
         } else {
           document.documentElement.classList.remove('dark');
+          document.documentElement.setAttribute('data-theme', 'light');
+          document.body.classList.remove('dark-theme');
         }
       }
     };
@@ -62,6 +74,20 @@ export default function Sidebar({ activeItem, onItemSelect }: SidebarProps) {
     };
   }, []);
 
+  // Initialize sidebar minimize state from localStorage
+  useEffect(() => {
+    const savedSidebarState = localStorage.getItem('sidebarMinimized');
+    if (savedSidebarState) {
+      setIsMinimized(savedSidebarState === 'true');
+    }
+  }, []);
+
+  // Save sidebar state to localStorage when it changes
+  useEffect(() => {
+    localStorage.setItem('sidebarMinimized', isMinimized.toString());
+    console.log('Sidebar state saved:', isMinimized ? 'true' : 'false');
+  }, [isMinimized]);
+
   // Toggle dark mode function
   const toggleDarkMode = () => {
     const newDarkMode = !isDarkMode;
@@ -69,11 +95,19 @@ export default function Sidebar({ activeItem, onItemSelect }: SidebarProps) {
     setIsManuallySet(true); // User has now manually set a preference
     
     if (newDarkMode) {
+      // Add both class and data attribute for multiple dark mode approaches
       document.documentElement.classList.add('dark');
+      document.documentElement.setAttribute('data-theme', 'dark');
+      document.body.classList.add('dark-theme');
       localStorage.setItem('theme', 'dark');
+      console.log('Dark mode enabled');
     } else {
+      // Remove both class and data attribute
       document.documentElement.classList.remove('dark');
+      document.documentElement.setAttribute('data-theme', 'light');
+      document.body.classList.remove('dark-theme');
       localStorage.setItem('theme', 'light');
+      console.log('Light mode enabled');
     }
   };
 
@@ -85,8 +119,12 @@ export default function Sidebar({ activeItem, onItemSelect }: SidebarProps) {
     setIsDarkMode(systemIsDark);
     if (systemIsDark) {
       document.documentElement.classList.add('dark');
+      document.documentElement.setAttribute('data-theme', 'dark');
+      document.body.classList.add('dark-theme');
     } else {
       document.documentElement.classList.remove('dark');
+      document.documentElement.setAttribute('data-theme', 'light');
+      document.body.classList.remove('dark-theme');
     }
   };
 
@@ -104,7 +142,7 @@ export default function Sidebar({ activeItem, onItemSelect }: SidebarProps) {
   ];
 
   return (
-    <div className={`pt-[20px] pb-[16px] bg-white dark:bg-[#1A1A1A] border-r border-gray-200 dark:border-gray-700 flex flex-col border_custom relative transition-all duration-300 ${isMinimized ? 'w-[84px] px-[20px]' : 'w-[272px] max-w-[272px] px-[20px]'}`}>
+    <div className={`pt-[20px] pb-[16px] bg-white dark:bg-[#1A1A1A]  flex flex-col border_custom relative transition-all duration-300 ${isMinimized ? 'w-[84px] px-[20px]' : 'w-[272px] max-w-[272px] px-[20px]'}`}>
       
       <button 
         onClick={toggleSidebar}
@@ -266,7 +304,7 @@ export default function Sidebar({ activeItem, onItemSelect }: SidebarProps) {
             <p className="text-[12px] text-[#525866] dark:text-gray-400">Free plan</p>
           </div>
           )}
-        
+          {/* {!isMinimized && ( */}
             <button className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
           <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
             <g clip-path="url(#clip0_20447_35624)">
@@ -280,7 +318,7 @@ export default function Sidebar({ activeItem, onItemSelect }: SidebarProps) {
             </defs>
           </svg>
           </button>
-          
+          {/* )} */}
         </div>
       </div>
     </div>

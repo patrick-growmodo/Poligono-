@@ -100,19 +100,95 @@ body {
 }
 
 /* Dark mode gradient background for auth pages */
-.auth-dark-gradient {
-  background: white;
-}
 
+@media (prefers-color-scheme: light) {
+  .auth-dark-gradient {
+    background: white;
+  }
+}
 @media (prefers-color-scheme: dark) {
   .auth-dark-gradient {
     background: linear-gradient(146deg, #191919 0.2%, #0B0A09 73.63%), #FFF;
   }
 }
+
+/* Custom dark theme implementation */
+body.dark-theme .auth-dark-gradient {
+  background: linear-gradient(146deg, #191919 0.2%, #0B0A09 73.63%), #FFF;
+}
+
+/* Alternative dark mode selectors */
+[data-theme="dark"] .auth-dark-gradient {
+  background: linear-gradient(146deg, #191919 0.2%, #0B0A09 73.63%), #FFF;
+}
+
+/* Tailwind dark mode class support */
+.dark .auth-dark-gradient {
+  background: linear-gradient(146deg, #191919 0.2%, #0B0A09 73.63%), #FFF;
+}
+
+/* Ensure light mode when not dark */
+.auth-dark-gradient {
+  background: white;
+}
+
+/* Custom theme utilities */
+.theme-bg-light {
+  background-color: #FFFFFF;
+}
+
+.theme-bg-dark {
+  background-color: #1A1A1A;
+}
+
+.theme-text-light {
+  color: #000000;
+}
+
+.theme-text-dark {
+  color: #FFFFFF;
+}
+
+/* Alternative dark mode utility classes */
+body.dark-theme .theme-bg-auto {
+  background-color: #1A1A1A;
+}
+
+body.dark-theme .theme-text-auto {
+  color: #FFFFFF;
+}
+
+[data-theme="dark"] .theme-bg-auto {
+  background-color: #1A1A1A;
+}
+
+[data-theme="dark"] .theme-text-auto {
+  color: #FFFFFF;
+}
 .border_custom{
   position: relative;
 }
-.border_custom::after {
+
+/* Light mode - no gradient border (commented out to hide in light mode) */
+/* .border_custom::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(
+      to bottom,
+      #4346ED 0%,
+      #DA46FB 18%,
+      #DA46FB 76%,
+      #4346ED 89%,
+      #6940E4 100%
+    );
+  } */
+
+/* Dark mode gradient border */
+.dark .border_custom::after {
     content: "";
     position: absolute;
     top: 0;

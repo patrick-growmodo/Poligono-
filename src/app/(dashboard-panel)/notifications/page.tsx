@@ -9,7 +9,7 @@ export default function NotificationsPage() {
       <Sidebar activeItem="Notifications" onItemSelect={() => {}} />
       
       <div className="flex-1 flex flex-col">
-        <header className="border-b border-gray-200 dark:border-gray-700 bg-white/50 dark:bg-black/20 backdrop-blur-sm">
+        <header className="bg-white/50 dark:bg-black/20 backdrop-blur-sm">
           <div className="px-6 py-4">
             <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">
               Notifications

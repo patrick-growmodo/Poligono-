@@ -6,7 +6,7 @@ const config: Config = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
-  darkMode: 'media', // Enable manual dark mode via class
+  darkMode: 'class', // Enable manual dark mode via class
   theme: {
     extend: {
         colors: {
@@ -20,7 +20,9 @@ const config: Config = {
             quinary: '#1A1A1A',
             senary: '#2F2F2F',
         },
-        
+        background: {
+          'gradient-dark': 'linear-gradient(146deg, #191919 0.2%, #0B0A09 73.63%), #FFF;',
+        },
         fontFamily: {
           'inter': ['var(--font-inter)', 'sans-serif'],
           'poppins': ['var(--font-poppins)', 'sans-serif'],

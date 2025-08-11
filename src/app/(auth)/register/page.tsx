@@ -35,8 +35,12 @@ export default function RegisterPage() {
     const applyTheme = (isDark: boolean) => {
       if (isDark) {
         document.documentElement.classList.add('dark');
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.body.classList.add('dark-theme');
       } else {
         document.documentElement.classList.remove('dark');
+        document.documentElement.setAttribute('data-theme', 'light');
+        document.body.classList.remove('dark-theme');
       }
     };
 
@@ -110,7 +114,7 @@ export default function RegisterPage() {
   ];
 
   return (
-    <div className="h-screen flex auth-dark-gradient">
+    <div className="h-screen flex  auth-dark-gradient">
       {/* Left Panel - Registration Form (50% on desktop, 100% on mobile) */}
       <div className="w-full lg:w-1/2 flex items-center justify-center  px-8 py-12">
         <div className="w-full max-w-[480px] space-y-8">

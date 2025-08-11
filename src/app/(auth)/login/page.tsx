@@ -35,8 +35,12 @@ export default function LoginPage() {
     const applyTheme = (isDark: boolean) => {
       if (isDark) {
         document.documentElement.classList.add('dark');
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.body.classList.add('dark-theme');
       } else {
         document.documentElement.classList.remove('dark');
+        document.documentElement.setAttribute('data-theme', 'light');
+        document.body.classList.remove('dark-theme');
       }
     };
 
@@ -156,12 +160,15 @@ export default function LoginPage() {
           </button>
 
           {/* Divider */}
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center">
+          <div className="relative flex items-center justify-center">
+            <div className="relative inset-0 flex items-center w-full">
               <div className="w-full border-t border-[#E5E7EB] dark:border-gray-600" />
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-4 auth-dark-gradient text-[#9CA3AF] dark:text-gray-400 font-inter">or</span>
+              <span className="px-4 bg-white dark:bg-[#11100D] text-[#9CA3AF] dark:text-gray-400 font-inter">or</span>
+            </div>
+            <div className="relative inset-0 flex items-center w-full">
+              <div className="w-full border-t border-[#E5E7EB] dark:border-gray-600" />
             </div>
           </div>
 

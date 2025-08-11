@@ -39,10 +39,17 @@ export default function ForgotPasswordPage() {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     
     const applyTheme = (isDark: boolean) => {
+   // Update React state to trigger re-render
       if (isDark) {
         document.documentElement.classList.add('dark');
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.body.classList.add('dark-theme');
+        console.log('ForgotPassword: Dark mode applied');
       } else {
         document.documentElement.classList.remove('dark');
+        document.documentElement.setAttribute('data-theme', 'light');
+        document.body.classList.remove('dark-theme');
+        console.log('ForgotPassword: Light mode applied');
       }
     };
 
