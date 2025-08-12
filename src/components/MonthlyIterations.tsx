@@ -308,9 +308,16 @@ export default function MonthlyIterations({ title }: { title: string }) {
           <ResponsiveContainer width="100%" height={270}>
             <AreaChart data={data} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
               <defs>
+                {/* Fill gradient (vertical) */}
                 <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="5%" stopColor="#FF5AFE" stopOpacity={0.8}/>
                   <stop offset="95%" stopColor="#6940E4" stopOpacity={0}/>
+                </linearGradient>
+                
+                {/* Stroke gradient (horizontal) */}
+                <linearGradient id="strokeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="-24.33%" stopColor="#FF5AFE"/>
+                  <stop offset="87.94%" stopColor="#6940E4"/>
                 </linearGradient>
               </defs>
               <XAxis 
@@ -344,14 +351,14 @@ export default function MonthlyIterations({ title }: { title: string }) {
               <Area 
                 type="monotone" 
                 dataKey="iterations" 
-                stroke="#FF5AFE" 
+                stroke="url(#strokeGradient)" 
                 strokeWidth={2}
                 fillOpacity={1} 
                 fill="url(#colorUv)" 
               />
               <ReferenceLine 
                 x="Jul 20" 
-                stroke="#FF5AFE" 
+                stroke="url(#strokeGradient)" 
                 strokeDasharray="3 3" 
                 strokeWidth={1}
               />
@@ -359,8 +366,8 @@ export default function MonthlyIterations({ title }: { title: string }) {
                 x="Jul 20" 
                 y={2678} 
                 r={4} 
-                fill="#FF5AFE" 
-                stroke="#FF5AFE"
+                fill="url(#strokeGradient)" 
+                stroke="url(#strokeGradient)"
               />
             </AreaChart>
           </ResponsiveContainer>
