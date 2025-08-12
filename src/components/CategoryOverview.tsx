@@ -6,7 +6,7 @@ const overviewData = [
   {
     title: 'Live Agents',
     count: '278',
-    icon: '/images/icons/live-agent.svg',
+    icon: '/images/icons/user.svg',
     isBackgroundColor: true
   },
   {
@@ -24,7 +24,7 @@ const overviewData = [
   {
     title: 'Monthly iterations',
     count: '12,780',
-    icon: '/images/icons/monthly.svg',
+    icon: '/images/icons/calendar.svg',
     isBackgroundColor: false
   }
 ]

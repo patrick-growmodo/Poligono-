@@ -7,6 +7,7 @@ import Image from 'next/image';
 import MonthlyOverview from '@/components/MonthlyOverview';
 import AgentList from '@/components/AgentList';
 
+
 export default function DashboardPage() {
   const [activeItem, setActiveItem] = useState('Dashboard');
 
@@ -18,14 +19,14 @@ export default function DashboardPage() {
       {/* Main Content */}
       <div className="flex-1 flex flex-col bg-[#F5F7FA] dark:bg-[#11100D] px-[24px] py-[31px]">
         {/* Header */}
-        <header className="dark:bg-black/20 backdrop-blur-sm flex justify-between items-center mb-[27px]">
+        <header className="backdrop-blur-sm flex justify-between items-center mb-[27px]">
           <div className="px-0 py-0">
             <h1 className="text-[24px] font-medium text-gray-900 dark:text-white flex items-center gap-2">
               <Image src="/images/icons/dashboard-browsing.svg" alt="Dashboard" width={24} height={24} className="dark:hidden" />
               <Image src="/images/icons/dashboard-browsing-dark.svg" alt="Dashboard" width={24} height={24} className="hidden dark:block" />
               {activeItem}
             </h1>
-            <p className="text-[18px] text-[#525866] dark:text-white font-inter font-light tracking-normal leading-[24px] mt-[12px]">
+            <p className="text-[16px] text-[#525866] dark:text-white font-inter font-light tracking-normal leading-[24px] mt-[12px]">
             Track all key metrics, agent activity, and performance insights from a single, unified dashboard.
             </p>
           </div>
@@ -45,6 +46,7 @@ export default function DashboardPage() {
          <CategoryOverview />
          <MonthlyOverview />
          <AgentList />
+         {/* <AgentListWithTanStack /> */}
         </main>
       </div>
     </div>

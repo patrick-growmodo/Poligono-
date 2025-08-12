@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 
-export default function OverviewCard({ title, count, icon, isBackgroundColor }: { title: string, count: string, icon: string, isBackgroundColor: boolean }) {
+export default function  AgentOverviewCard({ title, count, icon, isBackgroundColor, description }: { title: string, count: string, icon: string, isBackgroundColor: boolean, description: string }) {
   return (
     <div className="bg-transparents dark:bg-[#1A1A1A] rounded-[8px] border border-gray-200 dark:border-[#484848] pt-[16px] pb-[16px] pr-[12px] pl-[16px] w-[calc((100%_-_24px)_/_4)]"
     style={{
@@ -9,7 +9,7 @@ export default function OverviewCard({ title, count, icon, isBackgroundColor }: 
     }}
     >
       <div className="flex justify-between items-start">
-        <div className="flex flex-col items-center justify-between gap-[10px]">
+        <div className="flex flex-col items-start justify-between gap-[10px]">
         <div className="flex items-center justify-start gap-[10px]">
           <div className={`rounded-[6px] p-[7px] w-[34px] h-[34px] ${isBackgroundColor ? '' : 'bg-[#F5F7FA] dark:bg-[#333]'}`} style={{
             background: isBackgroundColor ? 'linear-gradient(0deg, #6940E4 0%, #DA46F8 100%);' : ''
@@ -26,7 +26,11 @@ export default function OverviewCard({ title, count, icon, isBackgroundColor }: 
         <p className={`text-[24px] font-inter font-medium tracking-[-0.6%] leading-[20px] dark:text-white ${isBackgroundColor ? 'text-white' : 'text-black'}`}>
         {count}
         </p>
-   
+        </div>
+        <div className="text-left w-full">
+        <p className={`text-[12px] font-inter font-normal tracking-[-0.6%] leading-[20px] dark:text-white ${isBackgroundColor ? 'text-white' : 'text-black'}`}>
+        {description}
+        </p>
         </div>
         </div>
     
