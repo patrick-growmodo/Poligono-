@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 
 export default function ListAgentView( { agents, selectedAgents, handleSelectAll, handleSelectAgent  }: { agents: any[], selectedAgents: any[], handleSelectAll: any, handleSelectAgent: any } ) { 
     return (
@@ -74,7 +75,7 @@ export default function ListAgentView( { agents, selectedAgents, handleSelectAll
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4012 15.26C11.2167 14.0833 13.1106 11.916 15.9993 11.916C18.888 11.916 20.782 14.0833 21.5975 15.26C21.9111 15.7126 21.9111 16.2863 21.5974 16.7389C20.782 17.9156 18.888 20.0827 15.9993 20.0827C13.1107 20.0827 11.2167 17.9156 10.4013 16.7389C10.0876 16.2863 10.0876 15.7126 10.4012 15.26ZM14.541 15.9993C14.2201 15.9993 13.9234 15.8957 13.6826 15.72C13.6716 15.8116 13.666 15.9048 13.666 15.9993C13.666 17.288 14.7107 18.3327 15.9993 18.3327C17.288 18.3327 18.3327 17.288 18.3327 15.9993C18.3327 14.7107 17.288 13.666 15.9993 13.666C15.9048 13.666 15.8116 13.6716 15.72 13.6826C15.8957 13.9234 15.9993 14.2201 15.9993 14.541C15.9993 15.3464 15.3464 15.9993 14.541 15.9993Z" fill="#40C4AA"/>
               </svg>
             </button>
-            <button className="p-1 rounded  text-blue-600 dark:text-blue-400 hover:bg-blue-200 dark:hover:bg-blue-800">
+            <Link href={`/agents/${agent.id}/edit`} className="p-1 rounded  text-blue-600 dark:text-blue-400 hover:bg-blue-200 dark:hover:bg-blue-800">
               <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect width="32" height="32" rx="6" fill="#33CFFF" fill-opacity="0.15"/>
                 <path d="M18.5452 10.9164C18.3233 10.6945 17.9637 10.6945 17.7418 10.9164C17.52 11.1382 17.52 11.4978 17.7418 11.7196L20.2803 14.2577C20.5021 14.4795 20.8618 14.4795 21.0836 14.2577C21.3055 14.0359 21.3055 13.6763 21.0836 13.4545L18.5452 10.9164Z" fill="#33CFFF"/>
@@ -82,7 +83,7 @@ export default function ListAgentView( { agents, selectedAgents, handleSelectAll
                 <path d="M11.1952 17.8697L10.7592 20.4857C10.6851 20.9298 11.0702 21.3148 11.5144 21.2408L14.1308 20.8048C14.3066 20.7755 14.4736 20.7109 14.6221 20.6159C14.7543 20.5314 14.7531 20.3484 14.6422 20.2375L11.7626 17.3583C11.6517 17.2474 11.4687 17.2463 11.3842 17.3784C11.2892 17.5269 11.2245 17.6939 11.1952 17.8697Z" fill="#33CFFF"/>
                 <path d="M16.5833 20.0833C16.2612 20.0833 16 20.3445 16 20.6667C16 20.9888 16.2612 21.25 16.5833 21.25H20.6667C20.9888 21.25 21.25 20.9888 21.25 20.6667C21.25 20.3445 20.9888 20.0833 20.6667 20.0833H16.5833Z" fill="#33CFFF"/>
               </svg>
-            </button>
+            </Link>
             <button className="p-1 rounded  text-red-600 dark:text-red-400 hover:bg-red-200 dark:hover:bg-red-800">
               <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect width="32" height="32" rx="6" fill="#DF1C41" fill-opacity="0.15"/>

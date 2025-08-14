@@ -10,17 +10,17 @@ export default function CardPlan({ plan }: { plan: any }) {
 
             <div>
             {/* Header */}
-            <div className="text-center mb-6">
+            <div className="text-center">
                 <div className="flex items-center justify-center">
                     <Image src={plan.icon} alt={plan.name} width={50} height={50} />
                 </div>
-                <h3 className="text-[20px] font-medium text-gray-900 dark:text-white mb-2">
+                <h3 className="text-[20px] font-medium text-gray-900 dark:text-white py-[16px]">
                     {plan.name}
                 </h3>
-                <p className="text-[14px] text-gray-600 dark:text-gray-400 mb-4">
+                <p className="text-[16px] text-[#868584] font-[300] leading-[20px] tracking-[-0.096px] dark:text-gray-400 mb-4">
                     {plan.description}
                 </p>
-                <div className="text-[32px] font-bold text-gray-900 dark:text-white">
+                <div className="text-[28px] leading-[20px] tracking-[-0.168px] font-[500] text-[#11100D] dark:text-white mb-[33px] mt-[33px]">
                     {plan.price}
                 </div>
             </div>

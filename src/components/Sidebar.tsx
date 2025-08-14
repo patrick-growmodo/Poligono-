@@ -142,7 +142,7 @@ export default function Sidebar({ activeItem, onItemSelect }: SidebarProps) {
   ];
 
   return (
-    <div className={`pt-[20px] pb-[16px] bg-white dark:bg-[#1A1A1A]  flex flex-col border_custom relative transition-all duration-300 ${isMinimized ? 'w-[84px] px-[20px]' : 'w-[272px] max-w-[272px] px-[20px]'}`}>
+    <div className={`h-[100vh] sticky top-0  pt-[20px] pb-[16px] bg-white dark:bg-[#1A1A1A]  flex flex-col border_custom  transition-all duration-300 ${isMinimized ? 'w-[84px] px-[20px]' : 'w-[272px] max-w-[272px] px-[20px]'}`}>
       
       <button 
         onClick={toggleSidebar}
