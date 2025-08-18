@@ -4,6 +4,7 @@ import { Handle, Position } from '@xyflow/react';
 
 interface AddFollowUpNodeData {
   label?: string;
+  onClick?: () => void;
 }
 
 interface AddFollowUpNodeProps {
@@ -13,7 +14,9 @@ interface AddFollowUpNodeProps {
 
 export default function AddFollowUpNode({ data, selected }: AddFollowUpNodeProps) {
   return (
-    <div className={`relative bg-white dark:bg-[#2A2A2A] rounded-xl border-2 transition-all duration-200 min-w-[200px] cursor-pointer hover:shadow-lg ${
+    <div 
+      onClick={data.onClick}
+      className={`relative bg-white dark:bg-[#2A2A2A] rounded-xl border-2 transition-all duration-200 min-w-[200px] cursor-pointer hover:shadow-lg ${
       selected ? 'border-[#DA46F8] shadow-lg' : 'border-[#DA46F8]'
     }`}>
       {/* Main content */}

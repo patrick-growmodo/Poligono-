@@ -61,7 +61,7 @@ export default function UserAgentNode({ data, selected }: UserAgentNodeProps) {
         
         {/* Role Badge */}
         <div className="mt-4 text-center">
-          <span className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-purple-100 dark:bg-[#2A2A2A] text-[#421ABA] border border-[#421ABA]">
+          <span className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-purple-100 dark:bg-[#2A2A2A] text-[#421ABA] border border-[#421ABA] dark:text-[#7b4fff] dark:border-[#7b4fff]">
             {role}
           </span>
         </div>

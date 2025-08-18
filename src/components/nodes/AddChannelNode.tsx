@@ -31,7 +31,7 @@ export default function AddChannelNode({ data, selected }: AddChannelNodeProps) 
           </div>
           
           {/* Label */}
-          <span className="text-[#6940E4] font-medium text-base">
+          <span className="text-[#6940E4] font-medium text-base dark:text-[#7b4fff]">
             {data.label || 'Add Channel'}
           </span>
         </div>

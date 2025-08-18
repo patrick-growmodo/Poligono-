@@ -18,26 +18,35 @@ interface ConfigModalProps {
 export default function ConfigModal({ isOpen, onClose, onSave, channelType }: ConfigModalProps) {
   const [channelName, setChannelName] = useState<string>('');
   const [accessToken, setAccessToken] = useState<string>('');
+  const [showAccessToken, setShowAccessToken] = useState<boolean>(false);
   const [phoneNumberId, setPhoneNumberId] = useState<string>('');
   const [botUsername, setBotUsername] = useState<string>('');
   const [websiteUrl, setWebsiteUrl] = useState<string>('');
+  const [webhookUrl, setWebhookUrl] = useState<string>('');
+  const [delay, setDelay] = useState<string>('30 minutes');
 
   // Pre-populate fields when modal opens with existing data
   React.useEffect(() => {
     if (isOpen && channelType && (channelType as any).currentData) {
       const currentData = (channelType as any).currentData;
+
       setChannelName(currentData.name || currentData.label || '');
       setAccessToken(currentData.accessToken || '');
       setPhoneNumberId(currentData.phoneNumberId || '');
       setBotUsername(currentData.botUsername || '');
       setWebsiteUrl(currentData.websiteUrl || '');
+      setWebhookUrl(currentData.webhookUrl || '');
+      setDelay(currentData.delay || '30 minutes');
     } else if (!isOpen) {
       // Reset form when modal closes
       setChannelName('');
       setAccessToken('');
+      setShowAccessToken(false);
       setPhoneNumberId('');
       setBotUsername('');
       setWebsiteUrl('');
+      setWebhookUrl('');
+      setDelay('30 minutes');
     }
   }, [isOpen, channelType]);
 
@@ -46,7 +55,7 @@ export default function ConfigModal({ isOpen, onClose, onSave, channelType }: Co
   const handleSubmit = () => {
     if (!channelName) return;
     
-    const configData = {
+    const configData: any = {
       name: channelName,
       accessToken,
       type: channelType.id,
@@ -63,6 +72,14 @@ export default function ConfigModal({ isOpen, onClose, onSave, channelType }: Co
     }
     if (channelType.id === 'webchat' && websiteUrl) {
       configData.websiteUrl = websiteUrl;
+    }
+    if (channelType.id === 'webhook' && webhookUrl) {
+      configData.webhookUrl = webhookUrl;
+    }
+    
+    // Add delay for follow-up actions (all follow-up types)
+    if (['send-email', 'redirect-agent', 'trigger-next-agent', 'create-ticket', 'schedule-reminder', 'webhook'].includes(channelType.id)) {
+      configData.delay = delay;
     }
     
     onSave(configData);
@@ -83,17 +100,26 @@ export default function ConfigModal({ isOpen, onClose, onSave, channelType }: Co
           </div>
           <div className='flex flex-col items-center justify-center'>
             <h2 className="text-[20px] font-normal text-[#000]">Edit {channelType.name}</h2>
+            {(channelType as any).currentData?.name && (
+              <p className="text-sm text-gray-600 mt-1">Channel: {(channelType as any).currentData.name}</p>
+            )}
           </div>
         </div>
 
         {/* Channel Type Display */}
-        <div className="">
-          <div className="flex flex-row gap-3">
-          <span> {typeof channelType.icon === 'string' ? channelType.icon : channelType.icon}</span>
+        <div className="mb-4">
+          <div className="flex flex-row gap-3 items-center">
+            <span>{typeof channelType.icon === 'string' ? channelType.icon : channelType.icon}</span>
+            <div>
               <h3 className={`font-normal text-[16px] text-[#525866]`}>
-               
-                 {channelType.name} Configuration</h3>
-              {/* <p className="text-sm text-gray-600">{channelType.description}</p> */}
+                {channelType.name} Configuration
+              </h3>
+              {(channelType as any).currentData?.name && (
+                <p className="text-xs text-gray-500">
+                  Configuring: {(channelType as any).currentData.name}
+                </p>
+              )}
+            </div>
           </div>
         </div>
 
@@ -114,21 +140,41 @@ export default function ConfigModal({ isOpen, onClose, onSave, channelType }: Co
           </div>
 
           {/* Access Token */}
+          {['whatsapp', 'telegram', 'webchat', 'instagram', 'messenger'].includes(channelType.id) && (
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Access Token
             </label>
-            <input
-              type="password"
-              value={accessToken}
-              onChange={(e) => setAccessToken(e.target.value)}
-              placeholder="Enter API access token"
-              className="w-full text-black bg-[#F6F6F6] px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-            />
+            <div className="relative">
+              <input
+                type={showAccessToken ? "text" : "password"}
+                value={accessToken}
+                onChange={(e) => setAccessToken(e.target.value)}
+                placeholder="Enter API access token"
+                className="w-full text-black bg-[#F6F6F6] px-3 py-2 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              />
+              <button 
+                type="button"
+                onClick={() => setShowAccessToken(!showAccessToken)}
+                className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 transition-colors"
+              >
+                {showAccessToken ? (
+                  <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                  </svg>
+                ) : (
+                  <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21" />
+                  </svg>
+                )}
+              </button>
+            </div>
             <p className="text-xs text-gray-500 mt-1">
               This will be encrypted and securely stored
             </p>
           </div>
+          )}
 
           {/* Channel-specific configurations */}
           {channelType.id === 'whatsapp' && (
@@ -175,6 +221,50 @@ export default function ConfigModal({ isOpen, onClose, onSave, channelType }: Co
               />
             </div>
           )}
+
+{[ 'webhook'].includes(channelType.id) && (
+             <div>
+               <label className="block text-sm font-medium text-gray-700 mb-2">
+                 Webhook URL
+               </label>
+               <input
+                 type="url"
+                 value={webhookUrl}
+                 onChange={(e) => setWebhookUrl(e.target.value)}
+                 placeholder="https://api.example.com/webhook"
+                 className="w-full text-black bg-[#F6F6F6] px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+               />
+               <p className="text-xs text-gray-500 mt-1">
+                 The URL where webhook data will be sent
+               </p>
+             </div>
+           )}
+
+           {/* Delay dropdown for follow-up actions */}
+           {['send-email', 'redirect-agent', 'trigger-next-agent', 'create-ticket', 'schedule-reminder', 'webhook'].includes(channelType.id) && (
+             <div>
+               <label className="block text-sm font-medium text-gray-700 mb-2">
+                 Delay
+               </label>
+               <select
+                 value={delay}
+                 onChange={(e) => setDelay(e.target.value)}
+                 className="w-full text-black bg-[#F6F6F6] px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+               >
+                 <option value="30 minutes">30 minutes</option>
+                 <option value="1 hour">1 hour</option>
+                 <option value="2 hours">2 hours</option>
+                 <option value="6 hours">6 hours</option>
+                 <option value="12 hours">12 hours</option>
+                 <option value="1 day">1 day</option>
+                 <option value="3 days">3 days</option>
+                 <option value="1 week">1 week</option>
+               </select>
+               <p className="text-xs text-gray-500 mt-1">
+                 When this action should be triggered
+               </p>
+             </div>
+           )}
         </div>
 
         {/* Action Buttons */}
@@ -190,7 +280,7 @@ export default function ConfigModal({ isOpen, onClose, onSave, channelType }: Co
             disabled={!channelName}
             className={`p-[8px_32px] rounded-lg font-medium transition-colors ${
               channelName
-                ? 'bg-purple-600 text-white hover:bg-purple-700 dark:bg-gradient-to-r from-[#6940E4] to-[#FF5AFE] dark:text-white'
+                ? 'bg-purple-600 text-white hover:bg-purple-700 bg-gradient-to-r from-[#6940E4] to-[#FF5AFE] dark:text-white'
                 : 'bg-gray-300 text-gray-500 cursor-not-allowed'
             }`}
           >

@@ -15,7 +15,6 @@ interface ChannelType {
   description: string;
   icon: string | JSX.Element;
   color: string;
-  selected: boolean;
 }
 
 const channelTypes: ChannelType[] = [
@@ -25,7 +24,6 @@ const channelTypes: ChannelType[] = [
     description: 'Connect your agent via WhatsApp Business API',
     icon: <Image src="/images/icons/whatsapp-icon.svg" alt="WhatsApp" width={24} height={24} />,
     color: '#525866',
-    selected: true
   },
   {
     id: 'telegram',
@@ -33,7 +31,6 @@ const channelTypes: ChannelType[] = [
     description: 'Integrate with Telegram using the Bot API',
     icon: <Image src="/images/icons/telegram-icon.svg" alt="Telegram" width={24} height={24} />,
     color: '#525866',
-    selected: false
   },
   {
     id: 'messenger',
@@ -41,7 +38,6 @@ const channelTypes: ChannelType[] = [
     description: 'Connect with users via Facebook Messenger',
     icon: <Image src="/images/icons/messenger-icon.svg" alt="Messenger" width={24} height={24} />,
     color: '#525866',
-    selected: false
   },
   {
     id: 'instagram',
@@ -49,7 +45,7 @@ const channelTypes: ChannelType[] = [
     description: 'Connect with users via Instagram messaging',
     icon: <Image src="/images/icons/instagram-icon.svg" alt="Instagram" width={24} height={24} />,
     color: '#ff0000',
-    selected: false
+
   },
   {
     id: 'voice',
@@ -57,7 +53,7 @@ const channelTypes: ChannelType[] = [
     description: 'Enable phone call support through voice',
     icon: <Image src="/images/icons/microphone-icon.svg" alt="Voice" width={24} height={24} className='dark:invert'/>,
     color: '#525866',
-    selected: false
+
   },
   {
     id: 'webchat',
@@ -65,7 +61,7 @@ const channelTypes: ChannelType[] = [
     description: 'Embed a live chat widget on your website',
     icon: <Image src="/images/icons/globe-icon.svg" alt="WebChat" width={24} height={24}  className='dark:invert'/>,
     color: '#525866',
-    selected: false
+
   }
 ];
 
@@ -75,13 +71,10 @@ export default function ChannelModal({ isOpen, onClose, onAddChannel }: ChannelM
   const [accessToken, setAccessToken] = useState<string>('');
   const [showAccessToken, setShowAccessToken] = useState<boolean>(false);
   const [phoneNumberId, setPhoneNumberId] = useState<string>('');
-  // Auto-select WhatsApp when modal opens
+  // Auto-select first channel when modal opens
   React.useEffect(() => {
-    if (isOpen) {
-      const defaultChannel = channelTypes.find(channel => channel.selected);
-      if (defaultChannel) {
-        setSelectedChannel(defaultChannel.id);
-      }
+    if (isOpen && channelTypes.length > 0) {
+      setSelectedChannel(channelTypes[0].id);
     }
   }, [isOpen]);
 
@@ -94,13 +87,19 @@ export default function ChannelModal({ isOpen, onClose, onAddChannel }: ChannelM
     
     onAddChannel({
       id: selectedChannel,
-      name: channelName,
+      name: channelName, // User-entered name
       type: selectedChannel,
       accessToken,
-      ...selectedChannelData
+      // Spread channel type data but exclude the 'name' property to avoid override
+      ...(selectedChannelData ? {
+        description: selectedChannelData.description,
+        icon: selectedChannelData.icon,
+        color: selectedChannelData.color,
+      
+      } : {})
     });
-    
-    // Reset form
+
+    // // Reset form
     setSelectedChannel('');
     setChannelName('');
     setAccessToken('');
@@ -131,10 +130,11 @@ export default function ChannelModal({ isOpen, onClose, onAddChannel }: ChannelM
                   selectedChannel === channel.id 
                     ? 'bg-gradient-to-r from-purple-500 via-purple-400 to-pink-400 p-[2px]'
                     : 'border-2 border-gray-200 dark:border-[#333] hover:border-gray-300 dark:hover:border-gray-500'
+
                 }`}
               >
                 <div className={`p-3 rounded-lg h-full flex flex-row gap-[16px] items-center ${
-                  selectedChannel === channel.id 
+                  selectedChannel === channel.id  
                     ? 'bg-white dark:bg-[#1A1A1A]' 
                     : 'dark:bg-[#1A1A1A]'
                 }`}>
@@ -160,7 +160,7 @@ export default function ChannelModal({ isOpen, onClose, onAddChannel }: ChannelM
         </div>
 
         {/* Configuration Section */}
-
+     {selectedChannel && (
           <div className="mb-6 p-4 bg-white dark:bg-[#1A1A1A] border border-[#D5D5D5] dark:border-[#333] rounded-lg">
             <div className="flex items-center gap-2 mb-3">
               <span className="text-gray-600 dark:text-gray-400">
@@ -184,21 +184,7 @@ export default function ChannelModal({ isOpen, onClose, onAddChannel }: ChannelM
               />
             </div>
 
-           {/* Phone Number ID */}
-           {/* {selectedChannel === 'whatsapp' && (
-           <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Phone Number ID
-              </label>
-              <input
-                type="text"
-                value={phoneNumberId}
-                onChange={(e) => setPhoneNumberId(e.target.value)}
-                placeholder="Enter WhatsApp Phone Number ID"
-                className="bg-[#F6F6F6] dark:bg-[#333] w-full p-[14px_16px] rounded-[6px] text-[14px] placeholder-[#9CA3AF] dark:placeholder-[#A6A6A6] focus:outline-none focus:ring-2 focus:ring-[#DA46F8] focus:border-transparent font-inter text-black dark:text-white border dark:border-gray-600"
-              />
-            </div>
-            )} */}
+      
             {/* Access Token */}
             <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -236,8 +222,39 @@ export default function ChannelModal({ isOpen, onClose, onAddChannel }: ChannelM
                 This will be encrypted and securely stored
               </p>
             </div>
+
+                 {/* Phone Number ID */}
+           {selectedChannel === 'whatsapp' && (
+           <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Phone Number ID
+              </label>
+              <input
+                type="text"
+                value={phoneNumberId}
+                onChange={(e) => setPhoneNumberId(e.target.value)}
+                placeholder="Enter WhatsApp Phone Number ID"
+                className="bg-[#F6F6F6] dark:bg-[#333] w-full p-[14px_16px] rounded-[6px] text-[14px] placeholder-[#9CA3AF] dark:placeholder-[#A6A6A6] focus:outline-none focus:ring-2 focus:ring-[#DA46F8] focus:border-transparent font-inter text-black dark:text-white border dark:border-gray-600"
+              />
+            </div>
+            )}
+
+{selectedChannel === 'telegram' && (
+           <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Bot Username
+              </label>
+              <input
+                type="text"
+                value={phoneNumberId}
+                onChange={(e) => setPhoneNumberId(e.target.value)}
+                placeholder="Enter Telegram Bot Username"
+                className="bg-[#F6F6F6] dark:bg-[#333] w-full p-[14px_16px] rounded-[6px] text-[14px] placeholder-[#9CA3AF] dark:placeholder-[#A6A6A6] focus:outline-none focus:ring-2 focus:ring-[#DA46F8] focus:border-transparent font-inter text-black dark:text-white border dark:border-gray-600"
+              />
+            </div>
+            )}
           </div>
-        
+        )}
 
         {/* Action Buttons */}
         <div className="flex gap-3 pt-4 justify-end">

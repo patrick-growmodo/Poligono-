@@ -4,6 +4,7 @@ import { Handle, Position } from '@xyflow/react';
 
 interface AddToolsNodeData {
   label?: string;
+  onClick?: () => void;
 }
 
 interface AddToolsNodeProps {
@@ -13,7 +14,9 @@ interface AddToolsNodeProps {
 
 export default function AddToolsNode({ data, selected }: AddToolsNodeProps) {
   return (
-    <div className={`relative bg-white dark:bg-[#2A2A2A] rounded-xl border-2 transition-all duration-200 min-w-[200px] cursor-pointer hover:shadow-lg ${
+    <div 
+    onClick={data.onClick}
+    className={`relative bg-white dark:bg-[#2A2A2A] rounded-xl border-2 transition-all duration-200 min-w-[200px] cursor-pointer hover:shadow-lg ${
       selected ? 'border-[#0E121B] dark:border-[#e5e7eb] shadow-lg' : 'border-[#0E121B] dark:border-[#e5e7eb]'
     }`}>
       {/* Main content */}
