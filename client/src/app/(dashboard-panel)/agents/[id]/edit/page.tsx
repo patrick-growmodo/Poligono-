@@ -1229,7 +1229,7 @@ export default function EditAgent({ params }: { params: { id: string } }) {
             // edgesUpdatable={true}
             edgesFocusable={true}
           >
-            <Background style={{ backgroundColor: '#f5f7fa' }} className="bg-[#f5f7fa] dark:bg-[#1A1A1A]"/>
+            <Background bgColor="#f5f7fa" className="dark:bg-[#1A1A1A]"/>
           </ReactFlow>
         </div>
               </main>
