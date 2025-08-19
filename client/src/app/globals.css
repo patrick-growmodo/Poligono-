@@ -1,0 +1,206 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+  --text-color: #6940E4;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .bg-gradient-radial {
+    background-image: radial-gradient(var(--tw-gradient-stops));
+  }
+  
+  .bg-gradient-conic {
+    background-image: conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops));
+  }
+} 
+@media (max-width: 1024px) {
+  .phone_image_mobile {
+    width: 100% !important;
+  }
+}
+
+/* Swiper pagination styles */
+.swiper-pagination {
+  position: relative !important;
+  margin-top: 2rem !important;
+}
+
+.swiper-pagination-bullet {
+  width: 100px !important;
+  height: 2px !important;
+  background: rgba(255, 255, 255, 0.3) !important;
+  opacity: 1 !important;
+  margin: 0 4px !important;
+  transition: all 0.3s ease !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: rgba(255, 255, 255, 1) !important;
+  transform: scale(1.2) !important; 
+}
+
+/* Custom pagination styles for register page */
+/* Position pagination inside the slide content */
+.register-slider .swiper-pagination {
+  position: absolute !important;
+  bottom: 50px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 100px !important;
+  margin: 0 !important;
+  z-index: 10 !important;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.register-pagination-bullet {
+  width: 33.33px !important;
+  height: 2px !important;
+  background: rgba(255, 255, 255, 0.3) !important;
+  opacity: 1 !important;
+  /* margin: 0 4px !important; */
+  border-radius: 50% !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+}
+
+.register-pagination-bullet-active {
+  background: #DA46F8 !important;
+}
+
+/* Dark mode gradient background for auth pages */
+
+@media (prefers-color-scheme: light) {
+  .auth-dark-gradient {
+    background: white;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .auth-dark-gradient {
+    background: linear-gradient(146deg, #191919 0.2%, #0B0A09 73.63%), #FFF;
+  }
+}
+
+/* Custom dark theme implementation */
+body.dark-theme .auth-dark-gradient {
+  background: linear-gradient(146deg, #191919 0.2%, #0B0A09 73.63%), #FFF;
+}
+
+/* Alternative dark mode selectors */
+[data-theme="dark"] .auth-dark-gradient {
+  background: linear-gradient(146deg, #191919 0.2%, #0B0A09 73.63%), #FFF;
+}
+
+/* Tailwind dark mode class support */
+.dark .auth-dark-gradient {
+  background: linear-gradient(146deg, #191919 0.2%, #0B0A09 73.63%), #FFF;
+}
+
+/* Ensure light mode when not dark */
+.auth-dark-gradient {
+  background: white;
+}
+
+/* Custom theme utilities */
+.theme-bg-light {
+  background-color: #FFFFFF;
+}
+
+.theme-bg-dark {
+  background-color: #1A1A1A;
+}
+
+.theme-text-light {
+  color: #000000;
+}
+
+.theme-text-dark {
+  color: #FFFFFF;
+}
+
+/* Alternative dark mode utility classes */
+body.dark-theme .theme-bg-auto {
+  background-color: #1A1A1A;
+}
+
+body.dark-theme .theme-text-auto {
+  color: #FFFFFF;
+}
+
+[data-theme="dark"] .theme-bg-auto {
+  background-color: #1A1A1A;
+}
+
+[data-theme="dark"] .theme-text-auto {
+  color: #FFFFFF;
+}
+.border_custom{
+  position: relative;
+}
+
+/* Light mode - no gradient border (commented out to hide in light mode) */
+/* .border_custom::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(
+      to bottom,
+      #4346ED 0%,
+      #DA46FB 18%,
+      #DA46FB 76%,
+      #4346ED 89%,
+      #6940E4 100%
+    );
+  } */
+
+/* Dark mode gradient border */
+.dark .border_custom::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(
+      to bottom,
+      #4346ED 0%,
+      #DA46FB 18%,
+      #DA46FB 76%,
+      #4346ED 89%,
+      #6940E4 100%
+    );
+  }
