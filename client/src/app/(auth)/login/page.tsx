@@ -10,7 +10,9 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
 // import { signIn } from '@auth0/nextjs-auth0';
-
+import { useAuth } from '@/components/AuthProvider';
+// import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 interface LoginFormData {
   email: string;
@@ -24,9 +26,30 @@ export default function LoginPage() {
     password: '',
     rememberMe: false
   });
-
+  // const [user, setUser] = useState<any>(null);
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string>('');
+  const { user: userAuth, loading, login } = useAuth();
+  const router = useRouter();
+  useEffect(() => {
+    // If user is already logged in, redirect to dashboard
+    if (userAuth && !loading) {
+      console.log('✅ User already logged in, redirecting to dashboard');
+      router.replace('/dashboard');
+    }
+  }, [userAuth, loading, router]);
+
+
+
+  // Check for OAuth errors in URL
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const errorParam = urlParams.get('error');
+    if (errorParam) {
+      setError(`Login failed: ${errorParam}`);
+    }
+  }, []);
 
   // Dark mode detection for auth pages
   useEffect(() => {
@@ -92,7 +115,17 @@ export default function LoginPage() {
     }
   };
 
- 
+  const handleGoogleLogin = () => {
+    setIsLoading(true);
+    
+    // Redirect to Express server for Google OAuth
+    const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:8080';
+    const authUrl = `${serverUrl}/api/auth/login`;
+    
+    console.log('🔗 Redirecting to Express server:', authUrl);
+    
+    window.location.href = authUrl;
+  };
   const sliderContent = [
     {
       title: "Connect with your own AI Agent",
@@ -147,17 +180,24 @@ export default function LoginPage() {
             </p> 
           </div>
 
+          {/* Error Display */}
+          {error && (
+            <div className="p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md">
+              <p className="text-red-600 dark:text-red-400 text-sm font-inter">{error}</p>
+            </div>
+          )}
+
           {/* Google Login Button */}
-          <Link
-            href="/auth/login"
-            className="w-full flex items-center justify-center gap-3 p-[14px_16px] rounded-[6px] bg-[#F6F6F6] dark:bg-[#333] hover:bg-gray-50 dark:hover:bg-[#404040] transition-colors border dark:border-gray-600"
+          <button
+            onClick={handleGoogleLogin}
+            disabled={isLoading}
+            className="w-full flex items-center justify-center gap-3 p-[14px_16px] rounded-[6px] bg-[#F6F6F6] dark:bg-[#333] hover:bg-gray-50 dark:hover:bg-[#404040] transition-colors border dark:border-gray-600 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <Image src="/images/icons/google-icon.svg" alt="Google" width={20} height={20} />
             <span className="text-[14px] text-[#374151] dark:text-white font-medium font-inter">
-              Log in with Google
+              {isLoading ? 'Redirecting...' : 'Log in with Google'}
             </span>
-          </Link>
-
+          </button>
           {/* Divider */}
           <div className="relative flex items-center justify-center">
             <div className="relative inset-0 flex items-center w-full">
@@ -289,7 +329,7 @@ export default function LoginPage() {
               disabled={isLoading}
               className="w-full bg-gradient-to-r from-[#DA46F8] to-[#6940E4] hover:bg-[#C93DF0] text-white py-3 px-4 rounded-[6px] text-[16px] font-medium font-inter transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isLoading ? 'Signing in...' : 'Sign Up'}
+              {isLoading ? 'Signing in...' : 'Sign In'}
             </button>
 
             {/* Sign Up Link */}

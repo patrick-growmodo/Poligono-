@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import MainAgentList from '@/components/MainAgentList';
 import ProtectedRoute from '@/components/ProtectedRoute';
+import Link from 'next/link';
 
 export default function AgentsPage() {
   const [activeItem, setActiveItem] = useState('Agents');
@@ -30,7 +31,7 @@ export default function AgentsPage() {
               Track performance, spot issues, and take action in seconds.
               </p>
             </div>
-            <button className="text-white px-[27px] py-[10px] rounded-md flex items-center gap-2 min-w-[200px]"
+            <Link href="/agents/create" className="text-white px-[27px] py-[10px] rounded-md flex items-center gap-2 min-w-[200px]"
               style={{
                 background: 'linear-gradient(90deg, #DA46F8, #6940E4)'
               }}>
@@ -38,7 +39,7 @@ export default function AgentsPage() {
               <span className="text-[14px] font-medium">
               Create your agent
               </span>
-            </button>
+            </Link>
           </header>
 
           {/* Main Content Area */}

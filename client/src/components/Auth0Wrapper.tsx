@@ -7,9 +7,7 @@ interface Auth0WrapperProps {
 }
 
 export default function Auth0Wrapper({ children }: Auth0WrapperProps) {
-  // Check if Auth0 environment variables are configured
-  const hasAuth0Config = process.env.NEXT_PUBLIC_AUTH0_DOMAIN || 
-                        process.env.AUTH0_DOMAIN;
+  const hasAuth0Config = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID 
 
   if (!hasAuth0Config) {
     console.warn('Auth0 not configured. Running without authentication.');
@@ -18,7 +16,7 @@ export default function Auth0Wrapper({ children }: Auth0WrapperProps) {
 
   try {
     // Dynamic import to avoid build-time errors
-    const { Auth0Provider } = require('@auth0/nextjs-auth0/client');
+    const { Auth0Provider } = require('@auth0/nextjs-auth0');
     return <Auth0Provider>{children}</Auth0Provider>;
   } catch (error) {
     console.error('Failed to load Auth0Provider:', error);

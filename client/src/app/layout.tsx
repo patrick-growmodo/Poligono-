@@ -2,7 +2,8 @@ import type { Metadata } from 'next'
 import { Poppins , Inter, Roboto,Montserrat } from 'next/font/google'
 import './globals.css'
 import ClientHeader from '@/components/ClientHeader'
-import Auth0Wrapper from '@/components/Auth0Wrapper'
+import { AuthProvider } from "@/components/AuthProvider";
+// import AuthDebug from '@/components/AuthDebug'
 
 const poppins = Poppins({       
   subsets: ['latin'],
@@ -44,10 +45,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${poppins.variable} ${inter.variable} ${roboto.variable} ${montserrat.variable} ${poppins.className} ${inter.className} ${roboto.className} ${montserrat.className}`}>
-        <Auth0Wrapper>
+        <AuthProvider>
+          {/* <SessionHandler /> */}
+          {/* <AuthDebug /> */}
           <ClientHeader />
           {children}
-        </Auth0Wrapper>
+        </AuthProvider>
       </body>
     </html> 
   )

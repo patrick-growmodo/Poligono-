@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useUser } from '@auth0/nextjs-auth0';
+import { useAuth } from './AuthProvider';
 
 interface SidebarProps {
   activeItem: string;
@@ -142,8 +143,8 @@ export default function Sidebar({ activeItem, onItemSelect }: SidebarProps) {
     { name: 'Settings', icon_light: '/images/icons/setting-light.svg', icon_dark: '/images/icons/setting-dark.svg', href: '/settings', isActive: false },
   ];
 
-  const { user } = useUser();
-console.log(user);
+  const { user, logout } = useAuth(); 
+// console.log(user);
 
   return (
     <div className={`h-[100vh] sticky top-0  pt-[20px] pb-[16px] bg-white dark:bg-[#1A1A1A]  flex flex-col border_custom  transition-all duration-300 ${isMinimized ? 'w-[84px] px-[20px]' : 'w-[272px] max-w-[272px] px-[20px]'}`}>
@@ -309,7 +310,7 @@ console.log(user);
           </div>
           )}
           {/* {!isMinimized && ( */}
-            <Link href="/auth/logout" className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+            <button onClick={logout} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
           <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
             <g clipPath="url(#clip0_20447_35624)">
               <path d="M10.4999 8.66654C10.1312 8.66654 9.83328 8.96524 9.83328 9.33315V11.9999C9.83328 12.3672 9.53457 12.6665 9.16654 12.6665H7.16656V2.6666C7.16656 2.09727 6.80389 1.58861 6.25861 1.39928L6.06122 1.33324H9.16654C9.53457 1.33324 9.83328 1.63255 9.83328 1.99998V3.99996C9.83328 4.36787 10.1312 4.66658 10.4999 4.66658C10.8685 4.66658 11.1665 4.36787 11.1665 3.99996V1.99998C11.1665 0.897329 10.2692 0 9.16654 0H1.99998C1.97459 0 1.95335 0.0113524 1.9287 0.0146483C1.89659 0.0119628 1.86595 0 1.83336 0C1.09802 0 0.5 0.597894 0.5 1.33324V13.3331C0.5 13.9024 0.862667 14.4111 1.40795 14.6004L5.41999 15.9378C5.55598 15.9798 5.69123 15.9998 5.83332 15.9998C6.56866 15.9998 7.16656 15.4018 7.16656 14.6665V13.9999H9.16654C10.2692 13.9999 11.1665 13.1025 11.1665 11.9999V9.33315C11.1665 8.96524 10.8685 8.66654 10.4999 8.66654Z" fill="#525866"/>
@@ -321,7 +322,7 @@ console.log(user);
               </clipPath>
             </defs>
           </svg>
-          </Link>
+          </button>
           {/* )} */}
         </div>
       </div>

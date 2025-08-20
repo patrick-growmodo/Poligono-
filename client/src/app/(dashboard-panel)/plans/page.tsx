@@ -6,6 +6,7 @@ import Image from 'next/image';
 import SubscriptionPlans from '@/components/SubscriptionPlans';
 import FrequentlyAskedQuestions from '@/components/FrequentlyAskedQuestions';
 import ProtectedRoute from '@/components/ProtectedRoute';
+import Link from 'next/link';
 
 
 export default function PlansPage() {
@@ -27,7 +28,7 @@ export default function PlansPage() {
               Track all key metrics, agent activity, and performance insights from a single, unified dashboard.
               </p>
             </div>
-            <button className="text-white px-[27px] py-[10px] rounded-md flex items-center gap-2 min-w-[200px]"
+            <Link href="/agetns/create" className="text-white px-[27px] py-[10px] rounded-md flex items-center gap-2 min-w-[200px]"
               style={{
                 background: 'linear-gradient(90deg, #DA46F8, #6940E4)'
               }}>
@@ -35,7 +36,7 @@ export default function PlansPage() {
               <span className="text-[14px] font-medium">
               Create your agent
               </span>
-            </button>
+            </Link>
           </header>
 
           <main className="flex-1 space-y-[24px]">

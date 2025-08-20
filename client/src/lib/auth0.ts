@@ -1,16 +1,16 @@
 // lib/auth0.js
 
 import { Auth0Client } from '@auth0/nextjs-auth0/server';
-import { validateEnvironmentVariables } from './security';
+// import { validateEnvironmentVariables } from './security';
 
-// Validate environment variables for security
-try {
-  validateEnvironmentVariables();
-  console.log('✅ Auth0 environment variables are properly configured');
-} catch (error) {
-  console.error('❌ Auth0 configuration error:', (error as Error).message);
-  throw error;
-}
+// // Validate environment variables for security
+// try {
+//   // validateEnvironmentVariables();
+//   console.log('✅ Auth0 environment variables are properly configured');
+// } catch (error) {
+//   console.error('❌ Auth0 configuration error:', (error as Error).message);
+//   throw error;
+// }
 
 // Only include audience if it's properly configured
 const authorizationParams: any = {
@@ -26,8 +26,8 @@ if (process.env.AUTH0_AUDIENCE &&
 
 export const auth0 = new Auth0Client({
   domain: process.env.AUTH0_DOMAIN!,
-  clientId: process.env.AUTH0_CLIENT_ID!,
-  clientSecret: process.env.AUTH0_CLIENT_SECRET!,
+  clientId: process.env.GOOGLE_CLIENT_ID!,
+  clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
   appBaseUrl: process.env.AUTH0_BASE_URL || process.env.APP_BASE_URL || 'http://localhost:3000',
   secret: process.env.AUTH0_SECRET!,
   authorizationParameters: authorizationParams,

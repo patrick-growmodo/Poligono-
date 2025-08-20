@@ -7,6 +7,7 @@ import Image from 'next/image';
 import MonthlyOverview from '@/components/MonthlyOverview';
 import AgentList from '@/components/AgentList';
 import ProtectedRoute from '@/components/ProtectedRoute';
+import Link from 'next/link';
 
 
 export default function DashboardPage() {
@@ -32,7 +33,7 @@ export default function DashboardPage() {
               Track all key metrics, agent activity, and performance insights from a single, unified dashboard.
               </p>
             </div>
-            <button className="text-white px-[27px] py-[10px] rounded-md flex items-center gap-2 min-w-[200px]"
+            <Link href="/agents/create" className="text-white px-[27px] py-[10px] rounded-md flex items-center gap-2 min-w-[200px]"
               style={{
                 background: 'linear-gradient(90deg, #DA46F8, #6940E4)'
               }}>
@@ -40,7 +41,7 @@ export default function DashboardPage() {
               <span className="text-[14px] font-medium">
               Create your agent
               </span>
-            </button>
+            </Link>
           </header>
 
           {/* Main Content Area */}
