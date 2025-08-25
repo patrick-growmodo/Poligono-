@@ -1,4 +1,4 @@
-// File: C:\Users\yalun\OneDrive\Desktop\Work Growmodo\poligono main\Poligono-\src\app\(dashboard-panel)\agents\page.tsx
+// File: C:\Users\yalun\OneDrive\Desktop\Work Growmodo\Poligono-\src\app\(dashboard-panel)\agents\page.tsx
 import * as entry from '../../../../../src/app/(dashboard-panel)/agents/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
